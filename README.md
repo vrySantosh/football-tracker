@@ -7,3 +7,6 @@ An Android app that displays info (fixtures, table position, news) about a speci
 
 R1:
 - Added basic test JSON request and parsing
+
+R2:
+- Added functionality to Log.w FCB games from current date (basic fixture)

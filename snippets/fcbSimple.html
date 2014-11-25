@@ -24,22 +24,6 @@
 			var rawGameLength;
 
 			console.log(obj);
-			rawGameLength = obj.games.length;
-
-			// parse game objects and store into an array
-			for(var i=0; i < rawGameLength; i++) {
-				gameArr.push(obj.games[i]);
-			}
-
-			// run through each game object and search team1 and team2 keys for FC Bayern
-			for(var j=0; j < rawGameLength; j++) {
-
-				if(gameArr[j].team1_key === "bayern" || gameArr[j].team2_key === "bayern") {
-					$("#content").append("<h2>" + gameArr[j].play_at + "</h2>");
-					$("#content").append("<p>" + gameArr[j].team1_title + " v. " + gameArr[j].team2_title + "</p>");
-				}
-
-			}
 
 		});
 	</script>
