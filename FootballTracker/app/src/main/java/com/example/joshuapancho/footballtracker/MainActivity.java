@@ -13,10 +13,16 @@ import android.widget.*;
 
 public class MainActivity extends Activity {
 
+    TextView heading;
+    TextView content;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        heading = (TextView) findViewById(R.id.heading);
+        content = (TextView) findViewById(R.id.content);
 
         new AsyncTaskParseJson().execute();
 
@@ -44,6 +50,59 @@ public class MainActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    class AsyncTaskParseJson extends AsyncTask<String, String, String> {
+
+        final String TAG = "AsyncTaskParseJson.java";
+
+        // set your json string url here
+        // Page apparently doesn't exist...?
+        String yourJsonStringUrl = "http://footballdb.herokuapp.com/api/v1/event/de.2014_15/rounds?callback=?";
+
+        // contacts JSONArray
+        JSONArray dataJsonArr = null;
+
+        @Override
+        protected void onPreExecute() {
+            heading.setText("Fixture");
+            content.setText("Please wait...");
+        }
+
+        @Override
+        protected String doInBackground(String... arg0) {
+
+            // instantiate our json parser
+            JSONParser jParser = new JSONParser();
+
+            // get json string from url
+            String json = null;
+
+            json = jParser.getJSONFromUrl(yourJsonStringUrl);
+
+            if(json == null) {
+                return "Null JSON Object";
+            } else {
+                try {
+                    return json;
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String strFromDoInBg) {
+
+            if(strFromDoInBg == null) {
+                content.setText("Oops, something went wrong!");
+            }
+
+            content.setText(strFromDoInBg);
+        }
+    }
+
 }
 
 

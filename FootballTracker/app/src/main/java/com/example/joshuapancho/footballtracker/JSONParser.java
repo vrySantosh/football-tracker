@@ -28,6 +28,7 @@ public class JSONParser {
     static JSONObject jObj = null;
     static String json;
     public String myStr;
+    public String retStr = "";
     public static int finalRound = 34;
 
     public String getJSONFromUrl(String url) {
@@ -38,7 +39,7 @@ public class JSONParser {
         JSONObject myJSON;
 
         try {
-            myURL = new URL("http://footballdb.herokuapp.com/api/v1/event/de.2014_15/rounds?callback=?");
+            myURL = new URL(url);
         } catch(MalformedURLException mue) {
             mue.printStackTrace();
         }
@@ -112,7 +113,7 @@ public class JSONParser {
 
                         String strURL = roundURL.toString();
 
-                        printGame(strURL);
+                        addGame(strURL);
 
                     }
 
@@ -129,17 +130,17 @@ public class JSONParser {
             }
         }
 
-        return myStr;
+        return retStr;
 
     }
 
-    public void printGame(String strURL) {
+    public void addGame(String strURL) {
 
         JSONArray myJArray = null;
         JSONObject myJSON;
         URL myURL = null;
         HttpURLConnection urlConnection = null;
-        String jStr, str, curGame;
+        String jStr, str;
 
         try {
             myURL = new URL(strURL);
@@ -182,8 +183,7 @@ public class JSONParser {
 
                         if(curJSON.getString("team1_key").equals("bayern") || curJSON.getString("team2_key").equals("bayern")) {
 
-                            curGame = curJSON.getString("play_at") + ": " + curJSON.getString("team1_title") + " vs. " + curJSON.getString("team2_title");
-                            Log.w("game", curGame);
+                            retStr = retStr + curJSON.getString("play_at") + ":\n" + curJSON.getString("team1_title") + " vs. " + curJSON.getString("team2_title") + "\n\n";
 
                         }
 

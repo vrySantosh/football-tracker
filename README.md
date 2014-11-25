@@ -10,3 +10,6 @@ R1:
 
 R2:
 - Added functionality to Log.w FCB games from current date (basic fixture)
+
+R3:
+- Added basic fixture functionality (prints to screen)

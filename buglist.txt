@@ -1,6 +1,0 @@
-HIGH PRIORITY:
-
-MEDIUM PRIORITY:
-- Slow performance when fetching games
-
-LOW PRIORITY:
