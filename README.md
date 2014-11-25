@@ -13,3 +13,6 @@ R2:
 
 R3:
 - Added basic fixture functionality (prints to screen)
+
+R4:
+- Added scroller

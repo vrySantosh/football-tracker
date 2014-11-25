@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.*;
 import android.widget.*;
@@ -52,8 +53,6 @@ public class MainActivity extends Activity {
     }
 
     class AsyncTaskParseJson extends AsyncTask<String, String, String> {
-
-        final String TAG = "AsyncTaskParseJson.java";
 
         // set your json string url here
         // Page apparently doesn't exist...?
