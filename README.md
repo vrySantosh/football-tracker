@@ -16,3 +16,7 @@ R3:
 
 R4:
 - Added scroller
+
+R5:
+- Added material design assets (cards and toolbar)
+- Renamed project directory to "MaterialTest"
