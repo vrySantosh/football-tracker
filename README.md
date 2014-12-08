@@ -23,3 +23,6 @@ R5:
 
 R6:
 - Changed addGame functionality: now stores details in an ArrayList of Game instances (as opposed to a huge string)
+
+R7:
+- Added Champions League games

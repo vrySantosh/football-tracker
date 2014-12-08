@@ -54,8 +54,6 @@ public class MainActivity extends ActionBarActivity {
 
     class AsyncTaskParseJson extends AsyncTask<String, String, ArrayList> {
 
-        String yourJsonStringUrl = "http://footballdb.herokuapp.com/api/v1/event/de.2014_15/rounds?callback=?";
-
         @Override
         protected void onPreExecute() {
             content.setText("Please wait...");
@@ -68,11 +66,14 @@ public class MainActivity extends ActionBarActivity {
             JSONParser jParser = new JSONParser();
 
             // get json string from url
-            ArrayList gameArr;
+            ArrayList deArr, clArr, finalArr;
 
-            gameArr = jParser.getJSONFromUrl(yourJsonStringUrl);
+            deArr = jParser.getJSONFromUrl(0);
+            clArr = jParser.getJSONFromUrl(1);
 
-            return gameArr;
+            finalArr = jParser.createFinalArray(deArr, clArr);
+
+            return finalArr;
 
         }
 
@@ -90,7 +91,7 @@ public class MainActivity extends ActionBarActivity {
 
                 curGame = (Game) myList.get(i);
 
-                finalRes = finalRes + curGame.date + "\n" + curGame.details + "\n\n";
+                finalRes = finalRes + curGame.dateStr + "\n" + curGame.details + "\n\n";
             }
 
             content.setText(finalRes);

@@ -14,9 +14,12 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Locale;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Collections;
 
 import android.util.Log;
 
@@ -26,17 +29,29 @@ import android.util.Log;
 public class JSONParser {
 
     public String myStr;
-    public ArrayList gameList = new ArrayList();
+    public ArrayList gameList;
+    public String deURL = "http://footballdb.herokuapp.com/api/v1/event/de.2014_15/rounds?callback=?";
+    public String clURL = "http://footballdb.herokuapp.com/api/v1/event/cl.2014_15/rounds?callback=?";
 
-    public ArrayList getJSONFromUrl(String url) {
+    public String deBuilder = "http://footballdb.herokuapp.com/api/v1/event/de.2014_15/round/?callback=?";
+    public String clBuilder = "http://footballdb.herokuapp.com/api/v1/event/cl.2014_15/round/?callback=?";
+
+    public ArrayList getJSONFromUrl(int selector) {
 
         URL myURL = null;
         HttpURLConnection urlConnection = null;
         String json = null;
         JSONObject myJSON;
 
+        gameList = new ArrayList();
+
         try {
-            myURL = new URL(url);
+
+            if(selector == 0)
+                myURL = new URL(deURL);
+            else if(selector == 1)
+                myURL = new URL(clURL);
+
         } catch(MalformedURLException mue) {
             mue.printStackTrace();
         }
@@ -104,7 +119,13 @@ public class JSONParser {
                     for(int i=0; i < posList.size(); i++) {
 
                         String curString = (String)posList.get(i);
-                        StringBuilder roundURL = new StringBuilder("http://footballdb.herokuapp.com/api/v1/event/de.2014_15/round/?callback=?");
+                        StringBuilder roundURL;
+
+                        if(selector == 0)
+                            roundURL = new StringBuilder(deBuilder);
+                        else
+                            roundURL = new StringBuilder(clBuilder);
+
                         roundURL.insert(62, curString);
 
                         String strURL = roundURL.toString();
@@ -199,6 +220,24 @@ public class JSONParser {
         }
 
 
+    }
+
+    public ArrayList createFinalArray(ArrayList arr1, ArrayList arr2) {
+
+        Game curGame, targetGame;
+        Date first, second;
+
+        ArrayList combined = arr1;
+        combined.addAll(arr2);
+
+        Collections.sort(combined, new Comparator<Game>() {
+            @Override
+            public int compare(Game firstGame, Game secondGame) {
+                return firstGame.date.compareTo(secondGame.date);
+            }
+        });
+
+        return combined;
     }
 
 }
