@@ -25,13 +25,10 @@ import android.util.Log;
  */
 public class JSONParser {
 
-    static JSONObject jObj = null;
-    static String json;
     public String myStr;
-    public String retStr = "";
-    public static int finalRound = 34;
+    public ArrayList gameList = new ArrayList();
 
-    public String getJSONFromUrl(String url) {
+    public ArrayList getJSONFromUrl(String url) {
 
         URL myURL = null;
         HttpURLConnection urlConnection = null;
@@ -52,7 +49,7 @@ public class JSONParser {
 
         if(urlConnection == null) {
             Log.w("URL", "URL Connection was null");
-            return json;
+            return gameList;
         } else {
             try {
 
@@ -71,11 +68,10 @@ public class JSONParser {
 
                 try {
                     myJSON = new JSONObject(myStr);
-                    JSONObject curJSON = null;
+                    JSONObject curJSON;
                     JSONArray myJArr = myJSON.getJSONArray("rounds");
-                    Date date = null;
+                    Date date;
                     ArrayList posList = new ArrayList();
-                    URL curURL = null;
 
                     Calendar c = Calendar.getInstance();
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
@@ -130,13 +126,13 @@ public class JSONParser {
             }
         }
 
-        return retStr;
+        return gameList;
 
     }
 
     public void addGame(String strURL) {
 
-        JSONArray myJArray = null;
+        JSONArray myJArray;
         JSONObject myJSON;
         URL myURL = null;
         HttpURLConnection urlConnection = null;
@@ -174,26 +170,25 @@ public class JSONParser {
 
                 try {
                     myJSON = new JSONObject(str);
-                    JSONObject curJSON = null;
+                    JSONObject curJSON;
                     myJArray = myJSON.getJSONArray("games");
 
-                    for(int i=0; i < myJArray.length(); i++) {
+                    for (int i = 0; i < myJArray.length(); i++) {
 
                         curJSON = myJArray.getJSONObject(i);
 
-                        if(curJSON.getString("team1_key").equals("bayern") || curJSON.getString("team2_key").equals("bayern")) {
+                        if (curJSON.getString("team1_key").equals("bayern") || curJSON.getString("team2_key").equals("bayern")) {
 
-                            retStr = retStr + curJSON.getString("play_at") + ":\n" + curJSON.getString("team1_title") + " vs. " + curJSON.getString("team2_title") + "\n\n";
+                            gameList.add(new Game(curJSON.getString("play_at"), (curJSON.getString("team1_title") + " vs. " + curJSON.getString("team2_title"))));
 
                         }
 
                     }
 
 
-                } catch(JSONException je) {
+                } catch (JSONException je) {
                     je.printStackTrace();
                 }
-
 
 
             } catch (IOException e) {

@@ -1,13 +1,9 @@
 package com.example.joshuapancho.materialtest;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import java.util.*;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
-import android.util.Log;
 import android.view.*;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.*;
@@ -24,11 +20,10 @@ public class MainActivity extends ActionBarActivity {
 
         content = (TextView) findViewById(R.id.content);
 
+        // UI stuff, set title
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Football Tracker");
-
-        TextView content = (TextView) findViewById(R.id.content);
 
         new AsyncTaskParseJson().execute();
 
@@ -57,14 +52,9 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    class AsyncTaskParseJson extends AsyncTask<String, String, String> {
+    class AsyncTaskParseJson extends AsyncTask<String, String, ArrayList> {
 
-        // set your json string url here
-        // Page apparently doesn't exist...?
         String yourJsonStringUrl = "http://footballdb.herokuapp.com/api/v1/event/de.2014_15/rounds?callback=?";
-
-        // contacts JSONArray
-        JSONArray dataJsonArr = null;
 
         @Override
         protected void onPreExecute() {
@@ -72,37 +62,39 @@ public class MainActivity extends ActionBarActivity {
         }
 
         @Override
-        protected String doInBackground(String... arg0) {
+        protected ArrayList doInBackground(String... arg0) {
 
             // instantiate our json parser
             JSONParser jParser = new JSONParser();
 
             // get json string from url
-            String json = null;
+            ArrayList gameArr;
 
-            json = jParser.getJSONFromUrl(yourJsonStringUrl);
+            gameArr = jParser.getJSONFromUrl(yourJsonStringUrl);
 
-            if(json == null) {
-                return "Null JSON Object";
-            } else {
-                try {
-                    return json;
-                } catch(Exception e) {
-                    e.printStackTrace();
-                }
-            }
+            return gameArr;
 
-            return null;
         }
 
         @Override
-        protected void onPostExecute(String strFromDoInBg) {
+        protected void onPostExecute(ArrayList myList) {
 
-            if(strFromDoInBg == null) {
+            String finalRes = "";
+            Game curGame;
+
+            if(myList.isEmpty()) {
                 content.setText("Oops, something went wrong!");
             }
 
-            content.setText(strFromDoInBg);
+            for(int i=0; i < myList.size(); i++) {
+
+                curGame = (Game) myList.get(i);
+
+                finalRes = finalRes + curGame.date + "\n" + curGame.details + "\n\n";
+            }
+
+            content.setText(finalRes);
+
         }
     }
 
