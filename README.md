@@ -1,9 +1,10 @@
-FOOTBALL TRACKER
+Football Tracker
+======
 
-OVERVIEW
-An Android app that displays info (fixtures, table position, news) about a specific team (in this case, Bayern Munich)
+An Android app that displays the upcoming Bundesliga and Champions League fixture of BM
 
-<em>Log</em>
+Log
+------
 
 R1:
 - Added basic test JSON request and parsing
@@ -26,3 +27,7 @@ R6:
 
 R7:
 - Added Champions League games
+
+R8:
+- Implemented RecyclerView with Cards
+- Added an indeterminate progress icon for loading

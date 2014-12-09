@@ -18,7 +18,6 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Locale;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Collections;
 
 import android.util.Log;
@@ -40,7 +39,7 @@ public class JSONParser {
 
         URL myURL = null;
         HttpURLConnection urlConnection = null;
-        String json = null;
+        String json;
         JSONObject myJSON;
 
         gameList = new ArrayList();
@@ -223,9 +222,6 @@ public class JSONParser {
     }
 
     public ArrayList createFinalArray(ArrayList arr1, ArrayList arr2) {
-
-        Game curGame, targetGame;
-        Date first, second;
 
         ArrayList combined = arr1;
         combined.addAll(arr2);

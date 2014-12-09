@@ -1,29 +1,44 @@
 package com.example.joshuapancho.materialtest;
 
-import org.json.JSONArray;
 import java.util.*;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.*;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.*;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
 
-    TextView content;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private TextView progText;
+    private ProgressBar progBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        content = (TextView) findViewById(R.id.content);
+        progText = (TextView) findViewById(R.id.loading_text);
+        progBar = (ProgressBar) findViewById(R.id.progbar);
 
         // UI stuff, set title
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Football Tracker");
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
 
         new AsyncTaskParseJson().execute();
 
@@ -56,7 +71,7 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         protected void onPreExecute() {
-            content.setText("Please wait...");
+
         }
 
         @Override
@@ -80,21 +95,13 @@ public class MainActivity extends ActionBarActivity {
         @Override
         protected void onPostExecute(ArrayList myList) {
 
-            String finalRes = "";
-            Game curGame;
+            progText.setVisibility(View.GONE);
+            progBar.setVisibility(View.GONE);
 
-            if(myList.isEmpty()) {
-                content.setText("Oops, something went wrong!");
-            }
+            // specify an adapter (see also next example)
+            mAdapter = new MyAdapter(myList);
+            mRecyclerView.setAdapter(mAdapter);
 
-            for(int i=0; i < myList.size(); i++) {
-
-                curGame = (Game) myList.get(i);
-
-                finalRes = finalRes + curGame.dateStr + "\n" + curGame.details + "\n\n";
-            }
-
-            content.setText(finalRes);
 
         }
     }
