@@ -56,10 +56,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         CardView curCard = holder.mTextView;
 
         TextView curText = (TextView) curCard.findViewById(R.id.text);
+        TextView curHeading = (TextView) curCard.findViewById(R.id.date);
 
         cur = (Game) mDataset.get(position);
 
-        curText.setText("\n" + cur.dateStr + "\n" + cur.details + "\n\n");
+        curHeading.setText(cur.dateStr);
+        curText.setText(cur.details);
 
     }
 

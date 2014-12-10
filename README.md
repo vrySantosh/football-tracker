@@ -31,3 +31,6 @@ R7:
 R8:
 - Implemented RecyclerView with Cards
 - Added an indeterminate progress icon for loading
+
+R9:
+- Added bold text for dates and separated date/details into different TextViews
