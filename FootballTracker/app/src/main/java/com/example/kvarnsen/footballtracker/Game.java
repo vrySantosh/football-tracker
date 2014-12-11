@@ -1,4 +1,4 @@
-package com.example.joshuapancho.materialtest;
+package com.example.kvarnsen.footballtracker;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -6,7 +6,11 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Created by joshuapancho on 8/12/14.
+ * Created by kvarnsen on 8/12/14.
+ */
+
+/*
+    Holds information about an individual game, with a string that represents date, and a Date object for comparison usage
  */
 public class Game {
 

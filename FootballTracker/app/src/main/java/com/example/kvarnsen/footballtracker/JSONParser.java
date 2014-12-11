@@ -1,4 +1,4 @@
-package com.example.joshuapancho.materialtest;
+package com.example.kvarnsen.footballtracker;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,8 +23,13 @@ import java.util.Collections;
 import android.util.Log;
 
 /**
- * Created by joshuapancho on 21/11/14.
+ * Created by kvarnsen on 21/11/14.
  */
+
+/*
+    Code adapted with alterations from https://www.codeofaninja.com/2013/11/android-json-parsing-tutorial.html
+ */
+
 public class JSONParser {
 
     public String myStr;
@@ -32,9 +37,15 @@ public class JSONParser {
     public String deURL = "http://footballdb.herokuapp.com/api/v1/event/de.2014_15/rounds?callback=?";
     public String clURL = "http://footballdb.herokuapp.com/api/v1/event/cl.2014_15/rounds?callback=?";
 
+    /*
+        Strings that form the basic template for each round
+     */
     public String deBuilder = "http://footballdb.herokuapp.com/api/v1/event/de.2014_15/round/?callback=?";
     public String clBuilder = "http://footballdb.herokuapp.com/api/v1/event/cl.2014_15/round/?callback=?";
 
+    /*
+        Handles URL opening and connection, and creation of the JSON object.
+     */
     public ArrayList getJSONFromUrl(int selector) {
 
         URL myURL = null;
@@ -75,6 +86,9 @@ public class JSONParser {
                     out.append(json);
                 }
 
+                /*
+                    Removes junk characters that are present in the Open Football JSON strings
+                 */
                 myStr = out.toString();
                 myStr = myStr.substring(1);
                 myStr = myStr.substring(1);
@@ -150,6 +164,9 @@ public class JSONParser {
 
     }
 
+    /*
+        Creates instances of Game objects and adds them to an ArrayList
+     */
     public void addGame(String strURL) {
 
         JSONArray myJArray;
@@ -221,6 +238,9 @@ public class JSONParser {
 
     }
 
+    /*
+        Sorts the Champions League and Bundesliga ArrayLists into one, according to date
+     */
     public ArrayList createFinalArray(ArrayList arr1, ArrayList arr2) {
 
         ArrayList combined = arr1;

@@ -1,4 +1,4 @@
-package com.example.joshuapancho.materialtest;
+package com.example.kvarnsen.footballtracker;
 
 import java.util.*;
 import android.os.AsyncTask;
@@ -25,22 +25,18 @@ public class MainActivity extends ActionBarActivity {
         progText = (TextView) findViewById(R.id.loading_text);
         progBar = (ProgressBar) findViewById(R.id.progbar);
 
-        // UI stuff, set title
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Football Tracker");
 
+        /* RecyclerView setup code adapted from https://developer.android.com/training/material/lists-cards.html */
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
 
-        // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        new AsyncTaskParseJson().execute();
+        new AsyncTaskParser().execute();
 
     }
 
@@ -67,7 +63,7 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    class AsyncTaskParseJson extends AsyncTask<String, String, ArrayList> {
+    class AsyncTaskParser extends AsyncTask<String, String, ArrayList> {
 
         @Override
         protected void onPreExecute() {
