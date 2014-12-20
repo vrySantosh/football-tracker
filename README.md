@@ -34,3 +34,6 @@ R8:
 
 R9:
 - Added bold text for dates and separated date/details into different TextViews
+
+R10:
+- Added drawer template and placeholder icon/color scheme
