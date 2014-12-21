@@ -46,7 +46,7 @@ public class JSONParser {
     /*
         Handles URL opening and connection, and creation of the JSON object.
      */
-    public ArrayList getJSONFromUrl(int selector) {
+    public ArrayList getJSONFromUrl(int selector, String team) {
 
         URL myURL = null;
         HttpURLConnection urlConnection = null;
@@ -143,7 +143,7 @@ public class JSONParser {
 
                         String strURL = roundURL.toString();
 
-                        addGame(strURL);
+                        addGame(strURL, team);
 
                     }
 
@@ -167,7 +167,7 @@ public class JSONParser {
     /*
         Creates instances of Game objects and adds them to an ArrayList
      */
-    public void addGame(String strURL) {
+    public void addGame(String strURL, String team) {
 
         JSONArray myJArray;
         JSONObject myJSON;
@@ -214,7 +214,7 @@ public class JSONParser {
 
                         curJSON = myJArray.getJSONObject(i);
 
-                        if (curJSON.getString("team1_key").equals("bayern") || curJSON.getString("team2_key").equals("bayern")) {
+                        if (curJSON.getString("team1_key").equals(team) || curJSON.getString("team2_key").equals(team)) {
 
                             gameList.add(new Game(curJSON.getString("play_at"), (curJSON.getString("team1_title") + " vs. " + curJSON.getString("team2_title"))));
 

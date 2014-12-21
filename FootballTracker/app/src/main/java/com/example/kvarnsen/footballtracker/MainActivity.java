@@ -2,11 +2,12 @@ package com.example.kvarnsen.footballtracker;
 
 import java.util.*;
 
-import android.content.res.Configuration;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.*;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.*;
@@ -47,7 +48,20 @@ public class MainActivity extends ActionBarActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        new AsyncTaskParser().execute();
+        Intent intent = getIntent();
+        String message = intent.getStringExtra(TeamSelectorActivity.EXTRA_MESSAGE);
+
+        if (message == null) {
+            progText.setText("Please select a team.");
+            progBar.setVisibility(View.GONE);
+        }
+        else if (message.equals(" ")) {
+            progText.setText("Please select a team.");
+            progBar.setVisibility(View.GONE);
+        }
+        else {
+            new AsyncTaskParser().execute(message);
+        }
 
     }
 
@@ -74,6 +88,11 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void onClick(View v) {
+        Intent intent = new Intent(this, TeamSelectorActivity.class);
+        startActivity(intent);
+    }
+
     class AsyncTaskParser extends AsyncTask<String, String, ArrayList> {
 
         @Override
@@ -90,8 +109,8 @@ public class MainActivity extends ActionBarActivity {
             // get json string from url
             ArrayList deArr, clArr, finalArr;
 
-            deArr = jParser.getJSONFromUrl(0);
-            clArr = jParser.getJSONFromUrl(1);
+            deArr = jParser.getJSONFromUrl(0, arg0[0]);
+            clArr = jParser.getJSONFromUrl(1, arg0[0]);
 
             finalArr = jParser.createFinalArray(deArr, clArr);
 
@@ -106,7 +125,7 @@ public class MainActivity extends ActionBarActivity {
             progBar.setVisibility(View.GONE);
 
             // specify an adapter (see also next example)
-            mAdapter = new MyAdapter(myList);
+            mAdapter = new MainAdapter(myList);
             mRecyclerView.setAdapter(mAdapter);
 
 

@@ -46,18 +46,66 @@
             android:layout_height="match_parent"/>
     </LinearLayout>
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/frame"
         android:layout_width="250dp"
         android:layout_height="match_parent"
         android:layout_gravity="left|start"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="@color/orange"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Drawer"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    </FrameLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_menu_icon"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Menu"
+                android:paddingTop="5dp"
+                android:paddingLeft="25dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:onClick="onClick"
+            android:clickable="true">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="2dp"
+                android:src="@drawable/ic_team_select"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Team Selection"
+                android:paddingTop="5dp"
+                android:paddingLeft="23dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </android.support.v4.widget.DrawerLayout>

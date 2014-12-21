@@ -6,5 +6,7 @@
     <string name="loading">Loading. Please wait...</string>
     <string name="drawer">Drawer</string>
     <string name="main">Main</string>
+    <string name="title_activity_team_selector">TeamSelectorActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

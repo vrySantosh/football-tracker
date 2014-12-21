@@ -15,7 +15,7 @@ import java.util.ArrayList;
     Code adapted with alterations from https://developer.android.com/training/material/lists-cards.html
  */
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     private ArrayList mDataset;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -26,13 +26,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }
     }
 
-    public MyAdapter(ArrayList myDataset) {
+    public MainAdapter(ArrayList myDataset) {
 
         mDataset = myDataset;
     }
 
     @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+    public MainAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                    int viewType) {
 
         CardView v = (CardView) LayoutInflater.from(parent.getContext())

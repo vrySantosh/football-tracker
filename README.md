@@ -37,3 +37,7 @@ R9:
 
 R10:
 - Added drawer template and placeholder icon/color scheme
+
+R11:
+- Adjusted CSS for drawer and added icons
+- Added Bundesliga selections (user can choose any Bundesliga team)
