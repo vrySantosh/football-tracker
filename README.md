@@ -41,3 +41,6 @@ R10:
 R11:
 - Adjusted CSS for drawer and added icons
 - Added Bundesliga selections (user can choose any Bundesliga team)
+
+R12:
+- Added La Liga and Premier League selections

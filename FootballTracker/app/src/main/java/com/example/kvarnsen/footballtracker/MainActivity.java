@@ -49,7 +49,8 @@ public class MainActivity extends ActionBarActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         Intent intent = getIntent();
-        String message = intent.getStringExtra(TeamSelectorActivity.EXTRA_MESSAGE);
+        String message = intent.getStringExtra(BundesligaActivity.EXTRA_MESSAGE);
+        String id = intent.getStringExtra(BundesligaActivity.EXTRA_ID);
 
         if (message == null) {
             progText.setText("Please select a team.");
@@ -60,7 +61,20 @@ public class MainActivity extends ActionBarActivity {
             progBar.setVisibility(View.GONE);
         }
         else {
-            new AsyncTaskParser().execute(message);
+
+            if(id.equals("bundesliga")) {
+                Log.w("Result", "Bundesliga selected");
+                new AsyncTaskParser().execute(message, id);
+            }
+            else if(id.equals("liga")) {
+                Log.w("Result", "La Liga selected");
+                new AsyncTaskParser().execute(message, id);
+            }
+            else {
+                Log.w("Result", "Premier League selected");
+                new AsyncTaskParser().execute(message, id);
+            }
+
         }
 
     }
@@ -89,7 +103,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void onClick(View v) {
-        Intent intent = new Intent(this, TeamSelectorActivity.class);
+        Intent intent = new Intent(this, LeagueSelectorActivity.class);
         startActivity(intent);
     }
 
@@ -107,12 +121,23 @@ public class MainActivity extends ActionBarActivity {
             JSONParser jParser = new JSONParser();
 
             // get json string from url
-            ArrayList deArr, clArr, finalArr;
+            ArrayList leagueArr = null;
+            ArrayList clArr = null;
+            ArrayList finalArr = null;
 
-            deArr = jParser.getJSONFromUrl(0, arg0[0]);
-            clArr = jParser.getJSONFromUrl(1, arg0[0]);
+            if(arg0[1].equals("bundesliga")) {
+                leagueArr = jParser.getJSONFromUrl(0, arg0[0]);
+                clArr = jParser.getJSONFromUrl(3, arg0[0]);
+            } else if(arg0[1].equals("liga")) {
+                leagueArr = jParser.getJSONFromUrl(1, arg0[0]);
+                clArr = jParser.getJSONFromUrl(3, arg0[0]);
+            } else if(arg0[1].equals("premier")) {
+                leagueArr = jParser.getJSONFromUrl(2, arg0[0]);
+                clArr = jParser.getJSONFromUrl(3, arg0[0]);
+            }
 
-            finalArr = jParser.createFinalArray(deArr, clArr);
+            if(leagueArr != null && clArr != null)
+                finalArr = jParser.createFinalArray(leagueArr, clArr);
 
             return finalArr;
 

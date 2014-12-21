@@ -3,8 +3,6 @@ package com.example.kvarnsen.footballtracker;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,14 +10,15 @@ import android.view.View;
 import android.widget.RadioButton;
 
 
-public class TeamSelectorActivity extends ActionBarActivity {
+public class BundesligaActivity extends ActionBarActivity {
 
     public final static String EXTRA_MESSAGE = "com.example.kvarnsen.MESSAGE";
+    public final static String EXTRA_ID = "com.example.kvarnsen.ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_team_selector);
+        setContentView(R.layout.activity_bundesliga);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.selector_toolbar);
         setSupportActionBar(toolbar);
@@ -110,6 +109,7 @@ public class TeamSelectorActivity extends ActionBarActivity {
                 break;
         }
 
+        intent.putExtra(EXTRA_ID, "premier");
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
 

@@ -8,5 +8,8 @@
     <string name="main">Main</string>
     <string name="title_activity_team_selector">TeamSelectorActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_league_selector">LeagueSelectorActivity</string>
+    <string name="title_activity_premier">PremierActivity</string>
+    <string name="title_activity_liga">LigaActivity</string>
 
 </resources>

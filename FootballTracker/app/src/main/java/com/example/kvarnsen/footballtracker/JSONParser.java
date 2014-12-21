@@ -35,12 +35,16 @@ public class JSONParser {
     public String myStr;
     public ArrayList gameList;
     public String deURL = "http://footballdb.herokuapp.com/api/v1/event/de.2014_15/rounds?callback=?";
+    public String ligaURL = "http://footballdb.herokuapp.com/api/v1/event/es.2014_15/rounds?callback=?";
+    public String engURL = "http://footballdb.herokuapp.com/api/v1/event/en.2014_15/rounds?callback=?";
     public String clURL = "http://footballdb.herokuapp.com/api/v1/event/cl.2014_15/rounds?callback=?";
 
     /*
         Strings that form the basic template for each round
      */
     public String deBuilder = "http://footballdb.herokuapp.com/api/v1/event/de.2014_15/round/?callback=?";
+    public String ligaBuilder = "http://footballdb.herokuapp.com/api/v1/event/es.2014_15/round/?callback=?";
+    public String engBuilder = "http://footballdb.herokuapp.com/api/v1/event/en.2014_15/round/?callback=?";
     public String clBuilder = "http://footballdb.herokuapp.com/api/v1/event/cl.2014_15/round/?callback=?";
 
     /*
@@ -57,10 +61,22 @@ public class JSONParser {
 
         try {
 
-            if(selector == 0)
-                myURL = new URL(deURL);
-            else if(selector == 1)
-                myURL = new URL(clURL);
+            switch (selector) {
+
+                case 0:
+                    myURL = new URL(deURL);
+                    break;
+                case 1:
+                    myURL = new URL(ligaURL);
+                    break;
+                case 2:
+                    myURL = new URL(engURL);
+                    break;
+                case 3:
+                    myURL = new URL(clURL);
+                    break;
+
+            }
 
         } catch(MalformedURLException mue) {
             mue.printStackTrace();
@@ -132,14 +148,27 @@ public class JSONParser {
                     for(int i=0; i < posList.size(); i++) {
 
                         String curString = (String)posList.get(i);
-                        StringBuilder roundURL;
+                        StringBuilder roundURL = null;
 
-                        if(selector == 0)
-                            roundURL = new StringBuilder(deBuilder);
-                        else
-                            roundURL = new StringBuilder(clBuilder);
+                        switch (selector) {
 
-                        roundURL.insert(62, curString);
+                            case 0:
+                                roundURL = new StringBuilder(deBuilder);
+                                break;
+                            case 1:
+                                roundURL = new StringBuilder(ligaBuilder);
+                                break;
+                            case 2:
+                                roundURL = new StringBuilder(engBuilder);
+                                break;
+                            case 3:
+                                roundURL = new StringBuilder(clBuilder);
+                                break;
+
+                        }
+
+                        if(roundURL != null)
+                            roundURL.insert(62, curString);
 
                         String strURL = roundURL.toString();
 
