@@ -109,7 +109,7 @@ public class BundesligaActivity extends ActionBarActivity {
                 break;
         }
 
-        intent.putExtra(EXTRA_ID, "premier");
+        intent.putExtra(EXTRA_ID, "bundesliga");
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
 

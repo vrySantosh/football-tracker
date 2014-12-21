@@ -62,18 +62,13 @@ public class MainActivity extends ActionBarActivity {
         }
         else {
 
-            if(id.equals("bundesliga")) {
-                Log.w("Result", "Bundesliga selected");
+            if(id.equals("bundesliga"))
                 new AsyncTaskParser().execute(message, id);
-            }
-            else if(id.equals("liga")) {
-                Log.w("Result", "La Liga selected");
+            else if(id.equals("liga"))
                 new AsyncTaskParser().execute(message, id);
-            }
-            else {
-                Log.w("Result", "Premier League selected");
+            else
                 new AsyncTaskParser().execute(message, id);
-            }
+
 
         }
 
