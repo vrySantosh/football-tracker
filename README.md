@@ -11,4 +11,4 @@ Requirements
 
 Building
 -----
-To build, import the project into Android Studio and run `build.gradle`.
+To build, import the project into Android Studio and run `build.gradle`
