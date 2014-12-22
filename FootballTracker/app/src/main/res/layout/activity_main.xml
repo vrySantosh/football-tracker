@@ -110,3 +110,5 @@
     </LinearLayout>
 
 </android.support.v4.widget.DrawerLayout>
+
+<!-- ic_menu_icon, ic_team_select icons from Google's Material Design System Icons pack -->

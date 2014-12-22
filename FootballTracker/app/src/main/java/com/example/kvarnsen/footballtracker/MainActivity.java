@@ -34,7 +34,7 @@ public class MainActivity extends ActionBarActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Football Tracker");
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_nav);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_nav);  // ic_nav icon from Google's Material Design System Icons pack
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer, R.string.main);
