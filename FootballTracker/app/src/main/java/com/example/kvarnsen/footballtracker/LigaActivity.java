@@ -9,7 +9,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 
-
+/*
+    Activity to handle La Liga team selections
+ */
 public class LigaActivity extends ActionBarActivity {
 
     public final static String EXTRA_MESSAGE = "com.example.kvarnsen.MESSAGE";

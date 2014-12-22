@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.Log;
 import android.view.*;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.*;
@@ -62,12 +61,19 @@ public class MainActivity extends ActionBarActivity {
         }
         else {
 
-            if(id.equals("bundesliga"))
-                new AsyncTaskParser().execute(message, id);
-            else if(id.equals("liga"))
-                new AsyncTaskParser().execute(message, id);
-            else
-                new AsyncTaskParser().execute(message, id);
+            switch (id) {
+                case "bundesliga":
+                    new AsyncTaskParser().execute(message, id);
+                    break;
+                case "liga":
+                    new AsyncTaskParser().execute(message, id);
+                    break;
+                case "premier":
+                    new AsyncTaskParser().execute(message, id);
+                    break;
+                default:
+                    break;
+            }
 
 
         }
@@ -105,14 +111,11 @@ public class MainActivity extends ActionBarActivity {
     class AsyncTaskParser extends AsyncTask<String, String, ArrayList> {
 
         @Override
-        protected void onPreExecute() {
-
-        }
+        protected void onPreExecute() {}
 
         @Override
         protected ArrayList doInBackground(String... arg0) {
 
-            // instantiate our json parser
             JSONParser jParser = new JSONParser();
 
             // get json string from url
@@ -120,15 +123,19 @@ public class MainActivity extends ActionBarActivity {
             ArrayList clArr = null;
             ArrayList finalArr = null;
 
-            if(arg0[1].equals("bundesliga")) {
-                leagueArr = jParser.getJSONFromUrl(0, arg0[0]);
-                clArr = jParser.getJSONFromUrl(3, arg0[0]);
-            } else if(arg0[1].equals("liga")) {
-                leagueArr = jParser.getJSONFromUrl(1, arg0[0]);
-                clArr = jParser.getJSONFromUrl(3, arg0[0]);
-            } else if(arg0[1].equals("premier")) {
-                leagueArr = jParser.getJSONFromUrl(2, arg0[0]);
-                clArr = jParser.getJSONFromUrl(3, arg0[0]);
+            switch (arg0[1]) {
+                case "bundesliga":
+                    leagueArr = jParser.getJSONFromUrl(0, arg0[0]);
+                    clArr = jParser.getJSONFromUrl(3, arg0[0]);
+                    break;
+                case "liga":
+                    leagueArr = jParser.getJSONFromUrl(1, arg0[0]);
+                    clArr = jParser.getJSONFromUrl(3, arg0[0]);
+                    break;
+                case "premier":
+                    leagueArr = jParser.getJSONFromUrl(2, arg0[0]);
+                    clArr = jParser.getJSONFromUrl(3, arg0[0]);
+                    break;
             }
 
             if(leagueArr != null && clArr != null)
@@ -141,6 +148,7 @@ public class MainActivity extends ActionBarActivity {
         @Override
         protected void onPostExecute(ArrayList myList) {
 
+            // "remove" loading text and progress wheel
             progText.setVisibility(View.GONE);
             progBar.setVisibility(View.GONE);
 

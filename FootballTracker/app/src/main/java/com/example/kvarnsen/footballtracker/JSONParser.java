@@ -27,6 +27,8 @@ import android.util.Log;
  */
 
 /*
+    Handles connection to Open Football API and parsing of JSON objects.
+
     Code adapted with alterations from https://www.codeofaninja.com/2013/11/android-json-parsing-tutorial.html
  */
 
@@ -34,6 +36,10 @@ public class JSONParser {
 
     public String myStr;
     public ArrayList gameList;
+
+    /*
+        URLs that hold JSON objects for all rounds of each respective league
+     */
     public String deURL = "http://footballdb.herokuapp.com/api/v1/event/de.2014_15/rounds?callback=?";
     public String ligaURL = "http://footballdb.herokuapp.com/api/v1/event/es.2014_15/rounds?callback=?";
     public String engURL = "http://footballdb.herokuapp.com/api/v1/event/en.2014_15/rounds?callback=?";
@@ -128,6 +134,8 @@ public class JSONParser {
                         pe.printStackTrace();
                     }
 
+                    // step through the JSONArray of rounds and compare against current date.
+                    // if a round's date is after the current date, add that position to posList
                     for(int i=0; i < myJArr.length(); i++) {
 
                         curJSON = myJArr.getJSONObject(i);
@@ -145,6 +153,7 @@ public class JSONParser {
 
                     }
 
+                    // step through posList and use the position attribute (curString) to fetch the required games
                     for(int i=0; i < posList.size(); i++) {
 
                         String curString = (String)posList.get(i);
@@ -229,6 +238,7 @@ public class JSONParser {
                     out.append(jStr);
                 }
 
+                // removes junk characters from JSON string
                 str = out.toString();
                 str = str.substring(1);
                 str = str.substring(1);
@@ -239,6 +249,7 @@ public class JSONParser {
                     JSONObject curJSON;
                     myJArray = myJSON.getJSONArray("games");
 
+                    // step through each game and add games with user's team to gameList
                     for (int i = 0; i < myJArray.length(); i++) {
 
                         curJSON = myJArray.getJSONObject(i);
@@ -268,7 +279,7 @@ public class JSONParser {
     }
 
     /*
-        Sorts the Champions League and Bundesliga ArrayLists into one, according to date
+        Sorts the Champions League and national league ArrayLists into one, according to date
      */
     public ArrayList createFinalArray(ArrayList arr1, ArrayList arr2) {
 

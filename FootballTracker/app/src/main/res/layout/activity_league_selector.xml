@@ -18,8 +18,8 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:layout_gravity="center"
-        android:paddingTop="50dp"
-        android:text="Select a league:" />
+        android:paddingTop="25dp"
+        android:text="@string/league_select" />
 
     <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -33,21 +33,21 @@
             android:id="@+id/bundesliga"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bundesliga"
+            android:text="@string/league_bundesliga"
             android:onClick="onLeagueButtonClicked"
             android:clickable="true"/>
         <RadioButton
             android:id="@+id/laliga"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="La Liga"
+            android:text="@string/league_liga"
             android:onClick="onLeagueButtonClicked"
             android:clickable="true"/>
         <RadioButton
             android:id="@+id/premier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Premier League"
+            android:text="@string/league_premier"
             android:onClick="onLeagueButtonClicked"
             android:clickable="true"/>
 

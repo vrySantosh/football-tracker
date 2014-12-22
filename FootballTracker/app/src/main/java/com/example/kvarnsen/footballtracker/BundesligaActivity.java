@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.RadioButton;
 
 
+/*
+    Activity to handle Bundesliga team selections
+ */
 public class BundesligaActivity extends ActionBarActivity {
 
     public final static String EXTRA_MESSAGE = "com.example.kvarnsen.MESSAGE";

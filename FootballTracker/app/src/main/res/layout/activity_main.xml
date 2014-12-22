@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="Menu"
+                android:text="@string/menu"
                 android:paddingTop="5dp"
                 android:paddingLeft="25dp"
                 android:textAlignment="center"
@@ -91,6 +91,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/team_icon_alt"
                 android:paddingLeft="2dp"
                 android:src="@drawable/ic_team_select"/>
 
@@ -98,7 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="Team Selection"
+                android:text="@string/drawer_team"
                 android:paddingTop="5dp"
                 android:paddingLeft="23dp"
                 android:textAlignment="center"

@@ -9,7 +9,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 
-
+/*
+    Activity to display league options to a user
+ */
 public class LeagueSelectorActivity extends ActionBarActivity {
 
     @Override
