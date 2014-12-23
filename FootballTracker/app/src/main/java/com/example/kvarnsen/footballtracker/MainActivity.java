@@ -103,8 +103,13 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onClick(View v) {
+    public void onSelectorClick(View v) {
         Intent intent = new Intent(this, LeagueSelectorActivity.class);
+        startActivity(intent);
+    }
+
+    public void onHighlightClick(View v) {
+        Intent intent = new Intent(this, GifActivity.class);
         startActivity(intent);
     }
 

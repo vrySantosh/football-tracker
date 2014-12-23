@@ -77,5 +77,8 @@
     <string name="team_tottenham">Tottenham Hotspur</string>
     <string name="team_westbrom">West Bromwich Albion</string>
     <string name="team_westham">West Ham United</string>
+    <string name="title_activity_gif">GifActivity</string>
+    <string name="play_icon">Play Icon</string>
+    <string name="highlights_text">Highlights</string>
 
 </resources>

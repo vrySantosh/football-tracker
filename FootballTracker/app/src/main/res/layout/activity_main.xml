@@ -85,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:onClick="onClick"
+            android:onClick="onSelectorClick"
             android:clickable="true">
 
             <ImageView
@@ -107,8 +107,35 @@
                 />
         </LinearLayout>
 
+        <LinearLayout
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:onClick="onHighlightClick"
+            android:clickable="true">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/play_icon"
+                android:paddingLeft="2dp"
+                android:src="@drawable/ic_play_icon"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/highlights_text"
+                android:paddingTop="5dp"
+                android:paddingLeft="23dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                />
+        </LinearLayout>
     </LinearLayout>
 
 </android.support.v4.widget.DrawerLayout>
 
-<!-- ic_menu_icon, ic_team_select icons from Google's Material Design System Icons pack -->
+<!-- ic_menu_icon, ic_team_select, ic_play_icon icons from Google's Material Design System Icons pack -->

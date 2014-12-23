@@ -34,6 +34,10 @@
             android:name="com.example.kvarnsen.footballtracker.LigaActivity"
             android:label="@string/title_activity_liga" >
         </activity>
+        <activity
+            android:name="com.example.kvarnsen.footballtracker.GifActivity"
+            android:label="@string/title_activity_gif" >
+        </activity>
     </application>
 
 </manifest> <!-- android:icon from https://dribbble.com/shots/1454854-Sport-glyph-vector-icons-freebie -->
