@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.*;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.*;
@@ -47,15 +48,10 @@ public class MainActivity extends ActionBarActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        Intent intent = getIntent();
-        String message = intent.getStringExtra(BundesligaActivity.EXTRA_MESSAGE);
-        String id = intent.getStringExtra(BundesligaActivity.EXTRA_ID);
+        String team = ((Globals) this.getApplication()).getTeam();
+        String id = ((Globals) this.getApplication()).getId();
 
-        if (message == null) {
-            progText.setText("Please select a team.");
-            progBar.setVisibility(View.GONE);
-        }
-        else if (message.equals(" ")) {
+        if (team == null) {
             progText.setText("Please select a team.");
             progBar.setVisibility(View.GONE);
         }
@@ -63,13 +59,13 @@ public class MainActivity extends ActionBarActivity {
 
             switch (id) {
                 case "bundesliga":
-                    new AsyncTaskParser().execute(message, id);
+                    new AsyncTaskParser().execute(team, id);
                     break;
                 case "liga":
-                    new AsyncTaskParser().execute(message, id);
+                    new AsyncTaskParser().execute(team, id);
                     break;
                 case "premier":
-                    new AsyncTaskParser().execute(message, id);
+                    new AsyncTaskParser().execute(team, id);
                     break;
                 default:
                     break;

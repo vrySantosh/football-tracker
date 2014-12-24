@@ -1,13 +1,22 @@
 package com.example.kvarnsen.footballtracker;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.webkit.WebView;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -27,23 +36,62 @@ import java.util.Iterator;
 
 public class GifActivity extends ActionBarActivity {
 
-    TextView gifText;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private TextView progText;
+    private ProgressBar progBar;
+    private ArrayList urls;
     TeamMap myMap = new TeamMap();
-
-    int id = 2;
-    String team = "arsenal";    // NOTE: both id and team are placeholders until global vars are established
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gif);
 
+        progText = (TextView) findViewById(R.id.gif_loading_text);
+        progBar = (ProgressBar) findViewById(R.id.gif_progbar);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.gif_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Football Tracker");
 
-        String teamKey = myMap.fetchSub(id, team);
-        new AsyncRedditFetcher().execute(teamKey);
+        /* RecyclerView setup code adapted from https://developer.android.com/training/material/lists-cards.html */
+        mRecyclerView = (RecyclerView) findViewById(R.id.gif_recycler);
+        mRecyclerView.setHasFixedSize(true);
+
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        String team = ((Globals) this.getApplication()).getTeam();
+        String id = ((Globals) this.getApplication()).getId();
+
+        if(team == null || id == null) {
+            progText.setText("No team selected. Please select a team!");
+            progBar.setVisibility(View.GONE);
+        } else {
+            String teamKey = myMap.fetchSub(id, team);
+
+            if(teamKey == null) {
+                progText.setText("Sorry, no highlights available for that team!");
+                progBar.setVisibility(View.GONE);
+            } else {
+                new AsyncRedditFetcher().execute(teamKey);
+            }
+
+        }
+
+    }
+
+    public void onHighlightClick(View v) {
+
+        int pos = v.getId();
+        String url = ((Highlight) urls.get(pos)).url;
+
+        Log.w("URL", url);
+
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browserIntent);
 
     }
 
@@ -73,7 +121,7 @@ public class GifActivity extends ActionBarActivity {
     class AsyncRedditFetcher extends AsyncTask<String, String, ArrayList> {
 
         private JSONArray urlArray;
-        private ArrayList listing = new ArrayList<String>();
+        private ArrayList listing = new ArrayList<Highlight>();
         private String url;
         private String urlFirst = "http://www.reddit.com/r/";
         private String urlSecond = "/search.json?q=site%3Agfycat&sort=new&restrict_sr=on";
@@ -120,13 +168,31 @@ public class GifActivity extends ActionBarActivity {
 
                 try {
 
+                    Bitmap bitmap = null;
+                    Highlight curHighlight;
                     myJSON = new JSONObject(rawJSON);
                     curJSON = myJSON.getJSONObject("data");
                     rawJArr = curJSON.getJSONArray("children");
 
-                    for(int i=0; i < rawJArr.length(); i++) {
+                    for(int i=0; i < 5; i++) {
                         curJSON = rawJArr.getJSONObject(i).getJSONObject("data");
-                        listing.add(curJSON.getString("url"));
+
+                        String url = curJSON.getString("url");
+                        String[] parts = url.split("//");
+                        String imageUrl = "http://thumbs." + parts[1] + "-poster.jpg";
+
+                        try {
+                            bitmap = BitmapFactory.decodeStream((InputStream) new URL(imageUrl).getContent());
+                        } catch (MalformedURLException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        if(bitmap != null) {
+                            curHighlight = new Highlight(curJSON.getString("title"), url, bitmap);
+                            listing.add(curHighlight);
+                        }
                     }
 
                 } catch(JSONException e) {
@@ -147,10 +213,19 @@ public class GifActivity extends ActionBarActivity {
         @Override
         protected void onPostExecute(ArrayList myList) {
 
-            String url = (String) myList.get(0);
+            urls = myList;
 
+            // "remove" loading text and progress wheel
+            progText.setVisibility(View.GONE);
+            progBar.setVisibility(View.GONE);
+
+            mAdapter = new GifRecyclerAdapter(myList);
+            mRecyclerView.setAdapter(mAdapter);
+
+            /*
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(browserIntent);
+            */
 
             /*
                 SOME NOTES ABOUT THIS FUNCTIONALITY:

@@ -30,7 +30,7 @@ public class TeamMap {
         ligaMap.put("barcelona", "barca");
         ligaMap.put("coruna", "deportivo");
         ligaMap.put("granada", "granadacf");
-        ligaMap.put("realmadrid", "realmadrid");
+        ligaMap.put("madrid", "realmadrid");
         ligaMap.put("sociedad", "sociedad");
         ligaMap.put("eibar", "sdeibar");
         ligaMap.put("valencia", "valenciacf");
@@ -57,19 +57,19 @@ public class TeamMap {
 
     }
 
-    public String fetchSub(int id, String key) {
+    public String fetchSub(String id, String key) {
 
         String sub = null;
 
         switch(id) {
 
-            case 0:
+            case "bundesliga":
                 sub = bundesligaMap.get(key);
                 break;
-            case 1:
+            case "liga":
                 sub = ligaMap.get(key);
                 break;
-            case 2:
+            case "premier":
                 sub = premierMap.get(key);
                 break;
 

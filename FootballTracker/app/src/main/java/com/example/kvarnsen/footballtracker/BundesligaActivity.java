@@ -15,9 +15,6 @@ import android.widget.RadioButton;
  */
 public class BundesligaActivity extends ActionBarActivity {
 
-    public final static String EXTRA_MESSAGE = "com.example.kvarnsen.MESSAGE";
-    public final static String EXTRA_ID = "com.example.kvarnsen.ID";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,8 +109,9 @@ public class BundesligaActivity extends ActionBarActivity {
                 break;
         }
 
-        intent.putExtra(EXTRA_ID, "bundesliga");
-        intent.putExtra(EXTRA_MESSAGE, message);
+        ((Globals) this.getApplication()).setTeam(message);
+        ((Globals) this.getApplication()).setId("bundesliga");
+
         startActivity(intent);
 
     }
