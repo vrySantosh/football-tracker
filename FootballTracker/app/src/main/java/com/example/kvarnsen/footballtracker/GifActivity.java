@@ -5,8 +5,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -43,11 +46,17 @@ public class GifActivity extends ActionBarActivity {
     private ProgressBar progBar;
     private ArrayList urls;
     TeamMap myMap = new TeamMap();
+    ActionBarDrawerToggle mDrawerToggle;
+    DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gif);
+
+        LinearLayout curLayout = (LinearLayout) findViewById(R.id.highlightButton);
+        curLayout.setClickable(false);
+        curLayout.setBackgroundColor(getResources().getColor(R.color.grey));
 
         progText = (TextView) findViewById(R.id.gif_loading_text);
         progBar = (ProgressBar) findViewById(R.id.gif_progbar);
@@ -55,6 +64,7 @@ public class GifActivity extends ActionBarActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.gif_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Football Tracker");
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_nav);
 
         /* RecyclerView setup code adapted from https://developer.android.com/training/material/lists-cards.html */
         mRecyclerView = (RecyclerView) findViewById(R.id.gif_recycler);
@@ -62,6 +72,10 @@ public class GifActivity extends ActionBarActivity {
 
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.gif_drawer);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer, R.string.main);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         String team = ((Globals) this.getApplication()).getTeam();
         String id = ((Globals) this.getApplication()).getId();
@@ -93,6 +107,16 @@ public class GifActivity extends ActionBarActivity {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(browserIntent);
 
+    }
+
+    public void onSelectorClick(View v) {
+        Intent intent = new Intent(this, LeagueSelectorActivity.class);
+        startActivity(intent);
+    }
+
+    public void onFixtureClick(View v) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 

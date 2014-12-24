@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.*;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.*;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -28,6 +29,10 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        LinearLayout curLayout = (LinearLayout) findViewById(R.id.fixtureButton);
+        curLayout.setClickable(false);
+        curLayout.setBackgroundColor(getResources().getColor(R.color.grey));
 
         progText = (TextView) findViewById(R.id.loading_text);
         progBar = (ProgressBar) findViewById(R.id.progbar);
@@ -106,6 +111,11 @@ public class MainActivity extends ActionBarActivity {
 
     public void onHighlightClick(View v) {
         Intent intent = new Intent(this, GifActivity.class);
+        startActivity(intent);
+    }
+
+    public void onFixtureClick(View v) {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 

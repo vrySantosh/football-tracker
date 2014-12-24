@@ -80,5 +80,7 @@
     <string name="title_activity_gif">GifActivity</string>
     <string name="play_icon">Play Icon</string>
     <string name="highlights_text">Highlights</string>
+    <string name="text_fixture">Fixture</string>
+    <string name="team_select_text">Select a team</string>
 
 </resources>
