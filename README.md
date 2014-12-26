@@ -1,7 +1,7 @@
 Football Tracker
 ======
 
-An Android app that displays the upcoming fixtures of any team from three popular soccer leagues (Bundesliga, Barclay's Premier League and La Liga), along with any Champions League games for that team.
+An Android app that displays the upcoming fixtures of any team from three popular soccer leagues (Bundesliga, Barclay's Premier League and La Liga) and any upcoming Champions League games, as well as highlights in the form of gfycat links.
 
 Requirements
 -----
