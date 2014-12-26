@@ -5,12 +5,8 @@ package com.example.kvarnsen.footballtracker;
  */
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,7 +40,7 @@ public class GifRecyclerAdapter extends RecyclerView.Adapter<GifRecyclerAdapter.
                                                      int viewType) {
 
         CardView v = (CardView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.videocard, parent, false);
+                .inflate(R.layout.highlightcard, parent, false);
 
         ViewHolder vh = new ViewHolder(v);
         return vh;
@@ -66,13 +62,6 @@ public class GifRecyclerAdapter extends RecyclerView.Adapter<GifRecyclerAdapter.
         curText.setText(cur.description);
 
         curImg.setImageBitmap(cur.bitmap);
-
-        /*
-        curText.setClickable(true);
-        curText.setMovementMethod(LinkMovementMethod.getInstance());
-        String text = "<a href='" + cur.url + "'>" + cur.description + "</a>";
-        curText.setText(Html.fromHtml(text));
-        */
 
     }
 

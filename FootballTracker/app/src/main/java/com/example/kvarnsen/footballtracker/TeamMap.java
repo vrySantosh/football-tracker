@@ -3,6 +3,9 @@ package com.example.kvarnsen.footballtracker;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+    HashMap to hold team-subreddit key value pairs
+ */
 public class TeamMap {
 
     private Map<String, String> bundesligaMap = new HashMap<String, String>();

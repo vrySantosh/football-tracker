@@ -41,4 +41,10 @@
         </activity>
     </application>
 
-</manifest> <!-- android:icon from https://dribbble.com/shots/1454854-Sport-glyph-vector-icons-freebie -->
+</manifest>
+
+<!--
+    android:icon from https://dribbble.com/shots/1454854-Sport-glyph-vector-icons-freebie
+
+    All other icons are from the Google Material Design Icon Pack.
+-->

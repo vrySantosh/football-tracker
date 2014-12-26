@@ -6,6 +6,10 @@ import android.app.Application;
  * Created by joshuapancho on 24/12/14.
  */
 
+/*
+    Holds global vars team and id to share between activities.
+ */
+
 public class Globals extends Application {
 
     private String team;

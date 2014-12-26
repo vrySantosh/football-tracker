@@ -142,9 +142,13 @@ public class GifActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /*
+        Responsible for contacting the Reddit API and grabbing new gfycat posts from a team's subreddit.
+
+        Also handles creation of Highlight instances.
+     */
     class AsyncRedditFetcher extends AsyncTask<String, String, ArrayList> {
 
-        private JSONArray urlArray;
         private ArrayList listing = new ArrayList<Highlight>();
         private String url;
         private String urlFirst = "http://www.reddit.com/r/";
@@ -159,7 +163,6 @@ public class GifActivity extends ActionBarActivity {
             URL myURL = null;
             HttpURLConnection urlConnection = null;
             String rawJSON;
-            String jsonOutput;
             JSONArray rawJArr;
             JSONObject myJSON, curJSON;
 
@@ -185,7 +188,6 @@ public class GifActivity extends ActionBarActivity {
 
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                 BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                StringBuilder out = new StringBuilder();
 
                 rawJSON = reader.readLine();
                 reader.close();
@@ -208,8 +210,6 @@ public class GifActivity extends ActionBarActivity {
                         try {
                             bitmap = BitmapFactory.decodeStream((InputStream) new URL(imageUrl).getContent());
                         } catch (MalformedURLException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
                             e.printStackTrace();
                         }
 
@@ -246,20 +246,6 @@ public class GifActivity extends ActionBarActivity {
             mAdapter = new GifRecyclerAdapter(myList);
             mRecyclerView.setAdapter(mAdapter);
 
-            /*
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            startActivity(browserIntent);
-            */
-
-            /*
-                SOME NOTES ABOUT THIS FUNCTIONALITY:
-
-                The above code works in opening the gfy in the browser.
-
-                Difficult to embed the video in the actual app (webview layout settings get overridden, and the webview
-                becomes huge and becomes scrollable.
-
-             */
 
         }
     }

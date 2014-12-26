@@ -119,6 +119,9 @@ public class MainActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
+    /*
+        Create ArrayList of Game instances for fixture use
+     */
     class AsyncTaskParser extends AsyncTask<String, String, ArrayList> {
 
         @Override
