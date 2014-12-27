@@ -29,6 +29,9 @@ public class BundesligaActivity extends ActionBarActivity {
     public void onRadioButtonClicked(View v) {
 
         Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
         boolean checked = ((RadioButton) v).isChecked();
 

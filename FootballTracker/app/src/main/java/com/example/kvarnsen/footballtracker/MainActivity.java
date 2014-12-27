@@ -3,6 +3,7 @@ package com.example.kvarnsen.footballtracker;
 import java.util.*;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -22,8 +23,10 @@ public class MainActivity extends ActionBarActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private TextView progText;
     private ProgressBar progBar;
+    private String PREFS_NAME = "team_prefs";
     ActionBarDrawerToggle mDrawerToggle;
     DrawerLayout mDrawerLayout;
+    ArrayList fixture = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +56,31 @@ public class MainActivity extends ActionBarActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        ((Globals) this.getApplication()).setFixture(fixture);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
         String team = ((Globals) this.getApplication()).getTeam();
         String id = ((Globals) this.getApplication()).getId();
+        fixture = ((Globals) this.getApplication()).getFixture();
+
+        if(fixture != null) {
+            progText.setVisibility(View.GONE);
+            progBar.setVisibility(View.GONE);
+
+            mAdapter = new MainAdapter(fixture);
+            mRecyclerView.setAdapter(mAdapter);
+            return;
+        }
 
         if (team == null) {
             progText.setText("Please select a team.");
@@ -78,7 +104,6 @@ public class MainActivity extends ActionBarActivity {
 
 
         }
-
     }
 
 
@@ -111,11 +136,8 @@ public class MainActivity extends ActionBarActivity {
 
     public void onHighlightClick(View v) {
         Intent intent = new Intent(this, GifActivity.class);
-        startActivity(intent);
-    }
-
-    public void onFixtureClick(View v) {
-        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
@@ -161,6 +183,8 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(ArrayList myList) {
+
+            fixture = myList;
 
             // "remove" loading text and progress wheel
             progText.setVisibility(View.GONE);

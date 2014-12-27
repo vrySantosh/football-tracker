@@ -77,8 +77,25 @@ public class GifActivity extends ActionBarActivity {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer, R.string.main);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
         String team = ((Globals) this.getApplication()).getTeam();
         String id = ((Globals) this.getApplication()).getId();
+
+        urls = ((Globals) this.getApplication()).getHighlights();
+
+        if(urls != null) {
+            progText.setVisibility(View.GONE);
+            progBar.setVisibility(View.GONE);
+
+            mAdapter = new GifRecyclerAdapter(urls);
+            mRecyclerView.setAdapter(mAdapter);
+            return;
+        }
 
         if(team == null || id == null) {
             progText.setText("No team selected. Please select a team!");
@@ -97,12 +114,18 @@ public class GifActivity extends ActionBarActivity {
 
     }
 
+    @Override
+    public void onPause() {
+       super.onPause();
+
+       ((Globals) this.getApplication()).setHighlights(urls);
+
+    }
+
     public void onHighlightClick(View v) {
 
         int pos = v.getId();
         String url = ((Highlight) urls.get(pos)).url;
-
-        Log.w("URL", url);
 
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(browserIntent);
@@ -116,6 +139,8 @@ public class GifActivity extends ActionBarActivity {
 
     public void onFixtureClick(View v) {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
