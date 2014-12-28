@@ -2,13 +2,13 @@ package com.example.kvarnsen.footballtracker;
 
 import java.util.*;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.Log;
 import android.view.*;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.*;
@@ -129,6 +129,35 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // code adapted from http://stackoverflow.com/questions/6290599/prompt-user-when-back-button-is-pressed
+    private void exit() {
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+                MainActivity.this);
+
+        alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+
+        });
+
+        alertDialog.setNegativeButton("No", null);
+        alertDialog.setMessage("Do you want to exit?");
+        alertDialog.setTitle("Football Tracker");
+        alertDialog.show();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        exit();
+
+    }
+
     public void onSelectorClick(View v) {
         Intent intent = new Intent(this, LeagueSelectorActivity.class);
         startActivity(intent);
@@ -136,8 +165,6 @@ public class MainActivity extends ActionBarActivity {
 
     public void onHighlightClick(View v) {
         Intent intent = new Intent(this, GifActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 

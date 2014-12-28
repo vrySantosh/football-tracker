@@ -28,10 +28,7 @@ public class LigaActivity extends ActionBarActivity {
     public void onRadioButtonClicked(View v) {
 
         Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         boolean checked = ((RadioButton) v).isChecked();
 
         String message = "";
