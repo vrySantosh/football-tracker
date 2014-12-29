@@ -118,6 +118,8 @@ public class LigaActivity extends ActionBarActivity {
 
         ((Globals) this.getApplication()).setTeam(message);
         ((Globals) this.getApplication()).setId("liga");
+        ((Globals) this.getApplication()).setFixture(null);
+        ((Globals) this.getApplication()).setHighlights(null);
 
         startActivity(intent);
 

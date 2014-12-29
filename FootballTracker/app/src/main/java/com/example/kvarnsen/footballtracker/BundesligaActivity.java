@@ -111,6 +111,8 @@ public class BundesligaActivity extends ActionBarActivity {
 
         ((Globals) this.getApplication()).setTeam(message);
         ((Globals) this.getApplication()).setId("bundesliga");
+        ((Globals) this.getApplication()).setFixture(null);
+        ((Globals) this.getApplication()).setHighlights(null);
 
         startActivity(intent);
 

@@ -118,6 +118,9 @@ public class PremierActivity extends ActionBarActivity {
 
         ((Globals) this.getApplication()).setTeam(message);
         ((Globals) this.getApplication()).setId("premier");
+        ((Globals) this.getApplication()).setFixture(null);
+        ((Globals) this.getApplication()).setHighlights(null);
+
         startActivity(intent);
 
     }

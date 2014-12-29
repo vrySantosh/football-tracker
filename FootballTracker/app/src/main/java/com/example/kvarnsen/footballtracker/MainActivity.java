@@ -145,7 +145,7 @@ public class MainActivity extends ActionBarActivity {
         });
 
         alertDialog.setNegativeButton("No", null);
-        alertDialog.setMessage("Do you want to exit?");
+        alertDialog.setMessage("Do you want to quit?");
         alertDialog.setTitle("Football Tracker");
         alertDialog.show();
 
