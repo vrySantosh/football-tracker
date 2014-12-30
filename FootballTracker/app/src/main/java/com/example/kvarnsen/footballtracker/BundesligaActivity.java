@@ -28,7 +28,7 @@ public class BundesligaActivity extends ActionBarActivity {
 
     public void onRadioButtonClicked(View v) {
 
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, FixtureActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         boolean checked = ((RadioButton) v).isChecked();
 
@@ -122,7 +122,7 @@ public class BundesligaActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_team_selector, menu);
+        getMenuInflater().inflate(R.menu.menu_bundesliga, menu);
         return true;
     }
 

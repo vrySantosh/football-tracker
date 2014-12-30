@@ -7,7 +7,6 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,29 +17,28 @@ import java.util.ArrayList;
     Code adapted with alterations from https://developer.android.com/training/material/lists-cards.html
  */
 
-public class GifRecyclerAdapter extends RecyclerView.Adapter<GifRecyclerAdapter.ViewHolder> {
-
+public class FixtureAdapter extends RecyclerView.Adapter<FixtureAdapter.ViewHolder> {
     private ArrayList mDataset;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public CardView mCardView;
+        public CardView mTextView;
         public ViewHolder(CardView v) {
             super(v);
-            mCardView = v;
+            mTextView = v;
         }
     }
 
-    public GifRecyclerAdapter(ArrayList myDataset) {
+    public FixtureAdapter(ArrayList myDataset) {
 
         mDataset = myDataset;
     }
 
     @Override
-    public GifRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                     int viewType) {
+    public FixtureAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                   int viewType) {
 
         CardView v = (CardView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.highlightcard, parent, false);
+                .inflate(R.layout.cardview, parent, false);
 
         ViewHolder vh = new ViewHolder(v);
         return vh;
@@ -49,26 +47,23 @@ public class GifRecyclerAdapter extends RecyclerView.Adapter<GifRecyclerAdapter.
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        Highlight cur;
+        Game cur;
 
-        CardView curCard = holder.mCardView;
+        CardView curCard = holder.mTextView;
 
-        TextView curText = (TextView) curCard.findViewById(R.id.highlight_desc);
-        ImageView curImg = (ImageView) curCard.findViewById(R.id.highlight_content);
+        TextView curText = (TextView) curCard.findViewById(R.id.text);
+        TextView curHeading = (TextView) curCard.findViewById(R.id.date);
 
-        cur = (Highlight) mDataset.get(position);
+        cur = (Game) mDataset.get(position);
 
-        curCard.setId(position);
-        curText.setText(cur.description);
-
-        curImg.setImageBitmap(cur.bitmap);
+        curHeading.setText(cur.dateStr);
+        curText.setText(cur.details);
 
     }
 
     @Override
     public int getItemCount() {
+
         return mDataset.size();
     }
-
-
 }

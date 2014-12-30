@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.kvarnsen.footballtracker.MainActivity"
+            android:name=".FixtureActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +36,7 @@
             android:label="@string/title_activity_liga" >
         </activity>
         <activity
-            android:name="com.example.kvarnsen.footballtracker.GifActivity"
+            android:name=".HighlightActivity"
             android:label="@string/title_activity_gif" >
         </activity>
     </application>

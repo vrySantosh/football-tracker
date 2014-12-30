@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class MainActivity extends ActionBarActivity {
+public class FixtureActivity extends ActionBarActivity {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -76,7 +76,7 @@ public class MainActivity extends ActionBarActivity {
             progText.setVisibility(View.GONE);
             progBar.setVisibility(View.GONE);
 
-            mAdapter = new MainAdapter(fixture);
+            mAdapter = new FixtureAdapter(fixture);
             mRecyclerView.setAdapter(mAdapter);
             return;
         }
@@ -132,7 +132,7 @@ public class MainActivity extends ActionBarActivity {
     private void exit() {
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(
-                MainActivity.this);
+                FixtureActivity.this);
 
         alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 
@@ -163,7 +163,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void onHighlightClick(View v) {
-        Intent intent = new Intent(this, GifActivity.class);
+        Intent intent = new Intent(this, HighlightActivity.class);
         startActivity(intent);
     }
 
@@ -217,7 +217,7 @@ public class MainActivity extends ActionBarActivity {
             progBar.setVisibility(View.GONE);
 
             // specify an adapter (see also next example)
-            mAdapter = new MainAdapter(myList);
+            mAdapter = new FixtureAdapter(myList);
             mRecyclerView.setAdapter(mAdapter);
 
 

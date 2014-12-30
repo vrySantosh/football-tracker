@@ -12,7 +12,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,7 +33,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class GifActivity extends ActionBarActivity {
+public class HighlightActivity extends ActionBarActivity {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -49,7 +48,7 @@ public class GifActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gif);
+        setContentView(R.layout.activity_highlight);
 
         LinearLayout curLayout = (LinearLayout) findViewById(R.id.highlightButton);
         curLayout.setClickable(false);
@@ -89,7 +88,7 @@ public class GifActivity extends ActionBarActivity {
             progText.setVisibility(View.GONE);
             progBar.setVisibility(View.GONE);
 
-            mAdapter = new GifRecyclerAdapter(urls);
+            mAdapter = new HighlightAdapter(urls);
             mRecyclerView.setAdapter(mAdapter);
             return;
         }
@@ -135,7 +134,7 @@ public class GifActivity extends ActionBarActivity {
     }
 
     public void onFixtureClick(View v) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, FixtureActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
@@ -144,7 +143,7 @@ public class GifActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_gif, menu);
+        getMenuInflater().inflate(R.menu.menu_highlight, menu);
         return true;
     }
 
@@ -274,7 +273,7 @@ public class GifActivity extends ActionBarActivity {
             progText.setVisibility(View.GONE);
             progBar.setVisibility(View.GONE);
 
-            mAdapter = new GifRecyclerAdapter(myList);
+            mAdapter = new HighlightAdapter(myList);
             mRecyclerView.setAdapter(mAdapter);
 
 
