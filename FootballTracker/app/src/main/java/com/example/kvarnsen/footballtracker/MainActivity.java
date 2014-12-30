@@ -23,7 +23,6 @@ public class MainActivity extends ActionBarActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private TextView progText;
     private ProgressBar progBar;
-    private String PREFS_NAME = "team_prefs";
     ActionBarDrawerToggle mDrawerToggle;
     DrawerLayout mDrawerLayout;
     ArrayList fixture = null;

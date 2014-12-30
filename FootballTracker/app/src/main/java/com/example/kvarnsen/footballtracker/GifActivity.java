@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -220,6 +221,10 @@ public class GifActivity extends ActionBarActivity {
                     curJSON = myJSON.getJSONObject("data");
                     rawJArr = curJSON.getJSONArray("children");
 
+                    if(rawJArr.length() == 0) {
+                        return null;
+                    }
+
                     for(int i=0; i < 5; i++) {
                         curJSON = rawJArr.getJSONObject(i).getJSONObject("data");
 
@@ -258,6 +263,12 @@ public class GifActivity extends ActionBarActivity {
         protected void onPostExecute(ArrayList myList) {
 
             urls = myList;
+
+            if(urls == null) {
+                progText.setText("Sorry, no highlights available for that team!");
+                progBar.setVisibility(View.GONE);
+                return;
+            }
 
             // "remove" loading text and progress wheel
             progText.setVisibility(View.GONE);
