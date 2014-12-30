@@ -4,7 +4,7 @@
     android:id="@+id/gif_drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".GifActivity">
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -52,6 +52,7 @@
         android:layout_width="250dp"
         android:layout_height="match_parent"
         android:layout_gravity="left|start"
+        android:clickable="true"
         android:background="@color/white"
         android:orientation="vertical">
 
