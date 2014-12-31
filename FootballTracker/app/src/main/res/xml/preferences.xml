@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <Preference android:title="Select a team">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.kvarnsen.footballtracker"
+            android:targetClass="com.example.kvarnsen.footballtracker.LeagueSelectorActivity"
+            />
+    </Preference>
+
+    <ListPreference
+        android:key="pref_highlightNo"
+        android:title="@string/highlight_limit"
+        android:dialogTitle="@string/highlight_max_selector_text"
+        android:entries="@array/highlight_entries"
+        android:entryValues="@array/highlight_entryValues"
+        android:defaultValue="@string/pref_highlight_number" />
+
+
+</PreferenceScreen>

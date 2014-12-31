@@ -10,6 +10,7 @@
     <string name="title_activity_league_selector">LeagueSelectorActivity</string>
     <string name="title_activity_premier">PremierActivity</string>
     <string name="title_activity_liga">LigaActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
     <string name="team_select">Select your team:</string>
     <string name="team_augsburg">FC Augsburg</string>
     <string name="team_leverkusen">Bayer Leverkusen</string>
@@ -54,7 +55,7 @@
     <string name="team_valencia">Valencia</string>
     <string name="team_villareal">Villareal</string>
     <string name="menu">Menu</string>
-    <string name="drawer_team">Team Selection</string>
+    <string name="drawer_team">Settings</string>
     <string name="team_icon_alt">team_select_icon</string>
     <string name="team_arsenal">Arsenal</string>
     <string name="team_aston">Aston Villa</string>
@@ -81,5 +82,8 @@
     <string name="highlights_text">Highlights</string>
     <string name="text_fixture">Fixture</string>
     <string name="team_select_text">Select a team</string>
+    <string name="highlight_max_selector_text">Set number of highlights to display</string>
+    <string name="highlight_limit">Highlight Limit</string>
+    <string name="pref_highlight_number">5</string>
 
 </resources>

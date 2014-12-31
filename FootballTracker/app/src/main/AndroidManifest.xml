@@ -39,6 +39,10 @@
             android:name=".HighlightActivity"
             android:label="@string/title_activity_gif" >
         </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
     </application>
 
 </manifest>

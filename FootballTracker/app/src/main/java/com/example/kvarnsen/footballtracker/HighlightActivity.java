@@ -1,10 +1,12 @@
 package com.example.kvarnsen.footballtracker;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,11 +47,14 @@ public class HighlightActivity extends ActionBarActivity {
     TeamMap myMap = new TeamMap();
     ActionBarDrawerToggle mDrawerToggle;
     DrawerLayout mDrawerLayout;
+    SharedPreferences mySPrefs = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_highlight);
+
+        mySPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         LinearLayout curLayout = (LinearLayout) findViewById(R.id.highlightButton);
         curLayout.setClickable(false);
@@ -128,8 +134,8 @@ public class HighlightActivity extends ActionBarActivity {
 
     }
 
-    public void onSelectorClick(View v) {
-        Intent intent = new Intent(this, LeagueSelectorActivity.class);
+    public void onSettingsClick(View v) {
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 
@@ -214,22 +220,50 @@ public class HighlightActivity extends ActionBarActivity {
 
                 try {
 
+                    int highlightMax;
                     Bitmap bitmap = null;
                     Highlight curHighlight;
                     myJSON = new JSONObject(rawJSON);
                     curJSON = myJSON.getJSONObject("data");
                     rawJArr = curJSON.getJSONArray("children");
 
-                    if(rawJArr.length() == 0) {
+                    String strHighlightNo =  mySPrefs.getString("pref_highlightNo", "notFound");
+
+                    if(strHighlightNo.equals("notFound")) {
+                        Log.w("FT", "shared pref not found");
                         return null;
                     }
 
-                    for(int i=0; i < 5; i++) {
+                    highlightMax = Integer.parseInt(strHighlightNo);
+
+                    Log.w("Arr Length", Integer.toString(rawJArr.length()));
+                    Log.w("Highlight No", Integer.toString(highlightMax));
+
+                    for(int i=0; i < rawJArr.length(); i++) {
+
+                        Log.w("I", Integer.toString(i));
+
+                        if(i == highlightMax) {
+                            Log.w("FT", "Breakpoint reached!");
+                            break;
+                        }
+
                         curJSON = rawJArr.getJSONObject(i).getJSONObject("data");
 
                         String url = curJSON.getString("url");
                         String[] parts = url.split("//");
-                        String imageUrl = "http://thumbs." + parts[1] + "-poster.jpg";
+                        String gfylink;
+
+                        if(parts[1].contains("www.")) {
+                            String[] secondParts = url.split("www.");
+                            gfylink = secondParts[1];
+                        } else {
+                            gfylink = parts[1];
+                        }
+
+                        String imageUrl = "http://thumbs." + gfylink + "-thumb100.jpg";
+
+                        Log.w("URL", imageUrl);
 
                         try {
                             bitmap = BitmapFactory.decodeStream((InputStream) new URL(imageUrl).getContent());
@@ -237,16 +271,22 @@ public class HighlightActivity extends ActionBarActivity {
                             e.printStackTrace();
                         }
 
-                        if(bitmap != null) {
+                        if(bitmap == null)
+                            curHighlight = new Highlight(curJSON.getString("title"), url, null);
+                        else
                             curHighlight = new Highlight(curJSON.getString("title"), url, bitmap);
-                            listing.add(curHighlight);
-                        }
+
+                        listing.add(curHighlight);
+
                     }
+
 
                 } catch(JSONException e) {
                     e.printStackTrace();
                     return listing;
                 }
+
+
 
             } catch (IOException e) {
                 return listing;

@@ -5,10 +5,13 @@ import java.util.*;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.*;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.*;
@@ -31,6 +34,10 @@ public class FixtureActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+        SharedPreferences mySPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        Log.w("FT", mySPrefs.getAll().toString());
 
         LinearLayout curLayout = (LinearLayout) findViewById(R.id.fixtureButton);
         curLayout.setClickable(false);
@@ -157,8 +164,8 @@ public class FixtureActivity extends ActionBarActivity {
 
     }
 
-    public void onSelectorClick(View v) {
-        Intent intent = new Intent(this, LeagueSelectorActivity.class);
+    public void onSettingsClick(View v) {
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 

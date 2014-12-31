@@ -61,7 +61,8 @@ public class HighlightAdapter extends RecyclerView.Adapter<HighlightAdapter.View
         curCard.setId(position);
         curText.setText(cur.description);
 
-        curImg.setImageBitmap(cur.bitmap);
+        if(cur.bitmap != null)
+            curImg.setImageBitmap(cur.bitmap);
 
     }
 
