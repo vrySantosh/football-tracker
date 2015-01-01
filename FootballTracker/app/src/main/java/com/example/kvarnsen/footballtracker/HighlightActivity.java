@@ -254,11 +254,38 @@ public class HighlightActivity extends ActionBarActivity {
                         String[] parts = url.split("//");
                         String gfylink;
 
-                        if(parts[1].contains("www.")) {
-                            String[] secondParts = url.split("www.");
-                            gfylink = secondParts[1];
+                        String curLink = parts[1];
+                        String[] newParts;
+
+                        if(curLink.contains(".gif")) {
+
+                            newParts = curLink.split(".gif");
+                            curLink = newParts[0];
+
+                            if(curLink.contains("#")) {
+                                newParts = curLink.split("#");
+                                curLink = newParts[0];
+                            }
+
+                            if(curLink.contains("www.")) {
+                                newParts = curLink.split("www.");
+                                curLink = newParts[1];
+                            }
+
+                            gfylink = curLink;
+
+                        } else if(curLink.contains("#")) {
+
+                            newParts = curLink.split("#");
+                            gfylink = newParts[0];
+
+                        } else if(curLink.contains("www.")) {
+
+                            newParts =  curLink.split("www.");
+                            gfylink = newParts[1];
+
                         } else {
-                            gfylink = parts[1];
+                            gfylink = curLink;
                         }
 
                         String imageUrl = "http://thumbs." + gfylink + "-thumb100.jpg";
