@@ -276,6 +276,11 @@ public class HighlightActivity extends ActionBarActivity {
                                 curLink = newParts[1];
                             }
 
+                            if(curLink.contains("giant.")) {
+                                newParts = curLink.split("giant.");
+                                curLink = newParts[1];
+                            }
+
                             gfylink = curLink;
 
                         } else if(curLink.contains("#")) {
@@ -285,7 +290,12 @@ public class HighlightActivity extends ActionBarActivity {
 
                         } else if(curLink.contains("www.")) {
 
-                            newParts =  curLink.split("www.");
+                            newParts = curLink.split("www.");
+                            gfylink = newParts[1];
+
+                        } else if(curLink.contains("giant.")) {
+
+                            newParts = curLink.split("giant.");
                             gfylink = newParts[1];
 
                         } else {
@@ -300,14 +310,15 @@ public class HighlightActivity extends ActionBarActivity {
                             bitmap = BitmapFactory.decodeStream((InputStream) new URL(imageUrl).getContent());
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
 
-                        if(bitmap == null)
-                            curHighlight = new Highlight(curJSON.getString("title"), url, null);
-                        else
-                            curHighlight = new Highlight(curJSON.getString("title"), url, bitmap);
+                        curHighlight = new Highlight(curJSON.getString("title"), url, bitmap);
 
                         listing.add(curHighlight);
+
+                        Log.w("Link", url);
 
                     }
 
