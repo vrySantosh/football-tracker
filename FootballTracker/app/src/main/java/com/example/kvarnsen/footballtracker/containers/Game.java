@@ -1,4 +1,4 @@
-package com.example.kvarnsen.footballtracker;
+package com.example.kvarnsen.footballtracker.containers;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

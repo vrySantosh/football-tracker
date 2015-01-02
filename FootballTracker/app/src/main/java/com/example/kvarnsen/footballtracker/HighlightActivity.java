@@ -22,6 +22,10 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.kvarnsen.footballtracker.adapters.HighlightAdapter;
+import com.example.kvarnsen.footballtracker.containers.Highlight;
+import com.example.kvarnsen.footballtracker.utility.TeamMap;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -1,4 +1,4 @@
-package com.example.kvarnsen.footballtracker;
+package com.example.kvarnsen.footballtracker.teamhandlers;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -8,6 +8,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
+
+import com.example.kvarnsen.footballtracker.FixtureActivity;
+import com.example.kvarnsen.footballtracker.Globals;
+import com.example.kvarnsen.footballtracker.R;
 
 /*
     Activity to handle Premier League team selections

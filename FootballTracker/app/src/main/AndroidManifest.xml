@@ -20,19 +20,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.kvarnsen.footballtracker.BundesligaActivity"
+            android:name=".teamhandlers.BundesligaActivity"
             android:label="@string/title_activity_team_selector" >
         </activity>
         <activity
-            android:name="com.example.kvarnsen.footballtracker.LeagueSelectorActivity"
+            android:name=".teamhandlers.LeagueSelectorActivity"
             android:label="@string/title_activity_league_selector" >
         </activity>
         <activity
-            android:name="com.example.kvarnsen.footballtracker.PremierActivity"
+            android:name=".teamhandlers.PremierActivity"
             android:label="@string/title_activity_premier" >
         </activity>
         <activity
-            android:name="com.example.kvarnsen.footballtracker.LigaActivity"
+            android:name=".teamhandlers.LigaActivity"
             android:label="@string/title_activity_liga" >
         </activity>
         <activity

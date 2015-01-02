@@ -1,4 +1,4 @@
-package com.example.kvarnsen.footballtracker;
+package com.example.kvarnsen.footballtracker.adapters;
 
 /**
  * Created by kvarnsen on 9/12/14.
@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.kvarnsen.footballtracker.R;
+import com.example.kvarnsen.footballtracker.containers.Highlight;
 
 import java.util.ArrayList;
 

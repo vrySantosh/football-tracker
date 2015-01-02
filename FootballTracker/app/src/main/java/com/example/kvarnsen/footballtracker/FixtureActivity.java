@@ -19,6 +19,9 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.kvarnsen.footballtracker.adapters.FixtureAdapter;
+import com.example.kvarnsen.footballtracker.utility.JSONParser;
+
 public class FixtureActivity extends ActionBarActivity {
 
     private RecyclerView mRecyclerView;

@@ -1,4 +1,4 @@
-package com.example.kvarnsen.footballtracker;
+package com.example.kvarnsen.footballtracker.utility;
 
 import java.util.HashMap;
 import java.util.Map;

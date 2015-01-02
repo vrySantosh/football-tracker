@@ -1,15 +1,13 @@
 package com.example.kvarnsen.footballtracker;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import java.util.List;
+import com.example.kvarnsen.footballtracker.ui.SettingsFragment;
 
 /**
  * Created by joshuapancho on 31/12/14.

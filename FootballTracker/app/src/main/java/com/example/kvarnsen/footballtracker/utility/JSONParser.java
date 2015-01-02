@@ -1,4 +1,4 @@
-package com.example.kvarnsen.footballtracker;
+package com.example.kvarnsen.footballtracker.utility;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import android.util.Log;
+
+import com.example.kvarnsen.footballtracker.containers.Game;
 
 /**
  * Created by kvarnsen on 21/11/14.
