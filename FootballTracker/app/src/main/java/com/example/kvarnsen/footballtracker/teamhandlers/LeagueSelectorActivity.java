@@ -24,6 +24,14 @@ public class LeagueSelectorActivity extends ActionBarActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.league_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Football Tracker");
+
+        toolbar.setNavigationIcon(R.drawable.ic_back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     public void onLeagueButtonClicked(View v) {
@@ -59,7 +67,6 @@ public class LeagueSelectorActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_league_selector, menu);
         return true;
     }
 

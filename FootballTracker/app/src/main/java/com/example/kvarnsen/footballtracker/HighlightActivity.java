@@ -166,6 +166,10 @@ public class HighlightActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+
             return true;
         }
 
@@ -345,7 +349,9 @@ public class HighlightActivity extends ActionBarActivity {
 
             urls = myList;
 
-            if(urls == null) {
+            Log.w("Urls Length", Integer.toString(urls.size()));
+
+            if(urls == null || urls.size() == 0) {
                 progText.setText("Sorry, no highlights available for that team!");
                 progBar.setVisibility(View.GONE);
                 return;
