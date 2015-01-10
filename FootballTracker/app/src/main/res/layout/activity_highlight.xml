@@ -28,6 +28,8 @@
             android:textAlignment="center"
             android:layout_gravity="center"
             android:paddingTop="50dp"
+            android:clickable="true"
+            android:onClick="onGifSelectTeamClick"
             android:text="@string/loading" />
 
         <ProgressBar

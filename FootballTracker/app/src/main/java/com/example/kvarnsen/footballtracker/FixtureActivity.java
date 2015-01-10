@@ -20,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.kvarnsen.footballtracker.adapters.FixtureAdapter;
+import com.example.kvarnsen.footballtracker.teamhandlers.LeagueSelectorActivity;
 import com.example.kvarnsen.footballtracker.utility.JSONParser;
 
 public class FixtureActivity extends ActionBarActivity {
@@ -181,13 +182,20 @@ public class FixtureActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
+    public void onSelectTeamClick(View v) {
+        Intent intent = new Intent(this, LeagueSelectorActivity.class);
+        startActivity(intent);
+    }
+
     /*
         Create ArrayList of Game instances for fixture use
      */
     class AsyncTaskParser extends AsyncTask<String, String, ArrayList> {
 
         @Override
-        protected void onPreExecute() {}
+        protected void onPreExecute() {
+            progText.setClickable(false);
+        }
 
         @Override
         protected ArrayList doInBackground(String... arg0) {

@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.example.kvarnsen.footballtracker.adapters.HighlightAdapter;
 import com.example.kvarnsen.footballtracker.containers.Highlight;
+import com.example.kvarnsen.footballtracker.teamhandlers.LeagueSelectorActivity;
 import com.example.kvarnsen.footballtracker.utility.TeamMap;
 
 import org.json.JSONArray;
@@ -110,6 +111,7 @@ public class HighlightActivity extends ActionBarActivity {
             String teamKey = myMap.fetchSub(id, team);
 
             if(teamKey == null) {
+                progText.setClickable(false);
                 progText.setText("Sorry, no highlights available for that team!");
                 progBar.setVisibility(View.GONE);
             } else {
@@ -146,6 +148,11 @@ public class HighlightActivity extends ActionBarActivity {
     public void onFixtureClick(View v) {
         Intent intent = new Intent(this, FixtureActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    public void onGifSelectTeamClick(View v) {
+        Intent intent = new Intent(this, LeagueSelectorActivity.class);
         startActivity(intent);
     }
 
@@ -189,7 +196,9 @@ public class HighlightActivity extends ActionBarActivity {
         private String urlSecond = "/search.json?q=site%3Agfycat&sort=new&restrict_sr=on";
 
         @Override
-        protected void onPreExecute() {}
+        protected void onPreExecute() {
+            progText.setClickable(false);
+        }
 
         @Override
         protected ArrayList doInBackground(String... args) {
