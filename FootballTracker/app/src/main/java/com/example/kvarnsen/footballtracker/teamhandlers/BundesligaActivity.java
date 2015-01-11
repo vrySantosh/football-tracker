@@ -5,13 +5,11 @@ import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 
-import com.example.kvarnsen.footballtracker.FixtureActivity;
 import com.example.kvarnsen.footballtracker.Globals;
+import com.example.kvarnsen.footballtracker.MainActivity;
 import com.example.kvarnsen.footballtracker.R;
 
 
@@ -41,7 +39,7 @@ public class BundesligaActivity extends ActionBarActivity {
 
     public void onRadioButtonClicked(View v) {
 
-        Intent intent = new Intent(this, FixtureActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         boolean checked = ((RadioButton) v).isChecked();
 
@@ -122,42 +120,17 @@ public class BundesligaActivity extends ActionBarActivity {
                 break;
         }
 
-        SharedPreferences preferences = getSharedPreferences(FixtureActivity.PREFS_NAME, 0);
+        SharedPreferences preferences = getSharedPreferences(MainActivity.PREFS_NAME, 0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("curTeam", message);
         editor.putString("curId", "bundesliga");
         editor.commit();
 
-        /*
-        ((Globals) this.getApplication()).setTeam(message);
-        ((Globals) this.getApplication()).setId("bundesliga");
         ((Globals) this.getApplication()).setFixture(null);
         ((Globals) this.getApplication()).setHighlights(null);
-        */
 
         startActivity(intent);
 
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

@@ -15,8 +15,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -40,6 +38,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+
+/*
+    Displays gfycat Highlights for the designated team.
+ */
 
 public class HighlightActivity extends ActionBarActivity {
 
@@ -90,7 +92,7 @@ public class HighlightActivity extends ActionBarActivity {
     public void onResume() {
         super.onResume();
 
-        SharedPreferences preferences = getSharedPreferences(FixtureActivity.PREFS_NAME, 0);
+        SharedPreferences preferences = getSharedPreferences(MainActivity.PREFS_NAME, 0);
 
         String team = preferences.getString("curTeam", null);
         String id = preferences.getString("curId", null);
@@ -148,7 +150,7 @@ public class HighlightActivity extends ActionBarActivity {
     }
 
     public void onFixtureClick(View v) {
-        Intent intent = new Intent(this, FixtureActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
@@ -156,33 +158,6 @@ public class HighlightActivity extends ActionBarActivity {
     public void onGifSelectTeamClick(View v) {
         Intent intent = new Intent(this, LeagueSelectorActivity.class);
         startActivity(intent);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_highlight, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
-
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     /*
@@ -255,15 +230,9 @@ public class HighlightActivity extends ActionBarActivity {
 
                     highlightMax = Integer.parseInt(strHighlightNo);
 
-                    Log.w("Arr Length", Integer.toString(rawJArr.length()));
-                    Log.w("Highlight No", Integer.toString(highlightMax));
-
                     for(int i=0; i < rawJArr.length(); i++) {
 
-                        Log.w("I", Integer.toString(i));
-
                         if(i == highlightMax) {
-                            Log.w("FT", "Breakpoint reached!");
                             break;
                         }
 
@@ -319,8 +288,6 @@ public class HighlightActivity extends ActionBarActivity {
 
                         String imageUrl = "http://thumbs." + gfylink + "-thumb100.jpg";
 
-                        Log.w("URL", imageUrl);
-
                         try {
                             bitmap = BitmapFactory.decodeStream((InputStream) new URL(imageUrl).getContent());
                         } catch (MalformedURLException e) {
@@ -332,8 +299,6 @@ public class HighlightActivity extends ActionBarActivity {
                         curHighlight = new Highlight(curJSON.getString("title"), url, bitmap);
 
                         listing.add(curHighlight);
-
-                        Log.w("Link", url);
 
                     }
 
@@ -359,8 +324,6 @@ public class HighlightActivity extends ActionBarActivity {
         protected void onPostExecute(ArrayList myList) {
 
             urls = myList;
-
-            Log.w("Urls Length", Integer.toString(urls.size()));
 
             if(urls == null || urls.size() == 0) {
                 progText.setText("Sorry, no highlights available for that team!");

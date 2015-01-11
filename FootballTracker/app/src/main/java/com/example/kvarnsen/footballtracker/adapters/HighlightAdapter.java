@@ -16,7 +16,7 @@ import com.example.kvarnsen.footballtracker.containers.Highlight;
 import java.util.ArrayList;
 
 /*
-    Adapter for MainActivity's RecyclerView.
+    Adapter for HighlightActivity's RecyclerView.
 
     Code adapted with alterations from https://developer.android.com/training/material/lists-cards.html
  */

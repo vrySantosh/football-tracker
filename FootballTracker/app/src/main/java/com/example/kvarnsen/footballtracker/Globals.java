@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 
 /*
-    Holds global vars team and id to share between activities.
+    Holds Fixture and Highlight ArrayLists, which persists for lifetime of the app
  */
 
 public class Globals extends Application {
