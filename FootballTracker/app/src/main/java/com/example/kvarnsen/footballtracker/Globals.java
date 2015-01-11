@@ -14,25 +14,7 @@ import java.util.ArrayList;
 
 public class Globals extends Application {
 
-    private String team;
-    private String id;
     private ArrayList fixture, highlights;
-
-    public String getTeam() {
-        return team;
-    }
-
-    public void setTeam(String myTeam) {
-        team = myTeam;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String myId) {
-        id = myId;
-    }
 
     public ArrayList getFixture() {
         return fixture;

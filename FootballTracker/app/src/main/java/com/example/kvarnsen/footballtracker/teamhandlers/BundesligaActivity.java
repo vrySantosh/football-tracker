@@ -1,6 +1,7 @@
 package com.example.kvarnsen.footballtracker.teamhandlers;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -121,10 +122,18 @@ public class BundesligaActivity extends ActionBarActivity {
                 break;
         }
 
+        SharedPreferences preferences = getSharedPreferences(FixtureActivity.PREFS_NAME, 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("curTeam", message);
+        editor.putString("curId", "bundesliga");
+        editor.commit();
+
+        /*
         ((Globals) this.getApplication()).setTeam(message);
         ((Globals) this.getApplication()).setId("bundesliga");
         ((Globals) this.getApplication()).setFixture(null);
         ((Globals) this.getApplication()).setHighlights(null);
+        */
 
         startActivity(intent);
 

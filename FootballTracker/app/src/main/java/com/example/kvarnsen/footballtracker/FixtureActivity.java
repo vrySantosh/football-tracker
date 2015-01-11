@@ -25,6 +25,8 @@ import com.example.kvarnsen.footballtracker.utility.JSONParser;
 
 public class FixtureActivity extends ActionBarActivity {
 
+    public final static String PREFS_NAME = "FootballTrackerPrefs";
+
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -33,6 +35,7 @@ public class FixtureActivity extends ActionBarActivity {
     ActionBarDrawerToggle mDrawerToggle;
     DrawerLayout mDrawerLayout;
     ArrayList fixture = null;
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +43,6 @@ public class FixtureActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
-        SharedPreferences mySPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        Log.w("FT", mySPrefs.getAll().toString());
 
         LinearLayout curLayout = (LinearLayout) findViewById(R.id.fixtureButton);
         curLayout.setClickable(false);
@@ -79,8 +80,11 @@ public class FixtureActivity extends ActionBarActivity {
     public void onResume() {
         super.onResume();
 
-        String team = ((Globals) this.getApplication()).getTeam();
-        String id = ((Globals) this.getApplication()).getId();
+        preferences = getSharedPreferences(PREFS_NAME, 0);
+
+        String team = preferences.getString("curTeam", null);
+        String id = preferences.getString("curId", null);
+
         fixture = ((Globals) this.getApplication()).getFixture();
 
         if(fixture != null) {

@@ -90,8 +90,10 @@ public class HighlightActivity extends ActionBarActivity {
     public void onResume() {
         super.onResume();
 
-        String team = ((Globals) this.getApplication()).getTeam();
-        String id = ((Globals) this.getApplication()).getId();
+        SharedPreferences preferences = getSharedPreferences(FixtureActivity.PREFS_NAME, 0);
+
+        String team = preferences.getString("curTeam", null);
+        String id = preferences.getString("curId", null);
 
         urls = ((Globals) this.getApplication()).getHighlights();
 
