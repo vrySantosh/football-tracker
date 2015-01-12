@@ -5,12 +5,10 @@ import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
 
-import com.example.kvarnsen.footballtracker.Globals;
+import com.example.kvarnsen.footballtracker.globals.Globals;
 import com.example.kvarnsen.footballtracker.MainActivity;
 import com.example.kvarnsen.footballtracker.R;
 

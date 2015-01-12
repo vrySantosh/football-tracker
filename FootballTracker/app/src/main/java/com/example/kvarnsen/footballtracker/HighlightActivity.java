@@ -1,11 +1,13 @@
 package com.example.kvarnsen.footballtracker;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -15,13 +17,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kvarnsen.footballtracker.adapters.HighlightAdapter;
 import com.example.kvarnsen.footballtracker.containers.Highlight;
+import com.example.kvarnsen.footballtracker.globals.Globals;
 import com.example.kvarnsen.footballtracker.teamhandlers.LeagueSelectorActivity;
 import com.example.kvarnsen.footballtracker.utility.TeamMap;
 
@@ -66,6 +71,22 @@ public class HighlightActivity extends ActionBarActivity {
         LinearLayout curLayout = (LinearLayout) findViewById(R.id.highlightButton);
         curLayout.setClickable(false);
         curLayout.setBackgroundColor(getResources().getColor(R.color.grey));
+
+        View.OnLongClickListener listener = new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                vb.vibrate(1000);
+
+                Toast toast = Toast.makeText(getApplicationContext(), v.getContentDescription(), Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 100);
+                toast.show();
+                return true;
+            }
+        };
+
+        findViewById(R.id.refresh_button).setOnLongClickListener(listener);
 
         progText = (TextView) findViewById(R.id.gif_loading_text);
         progBar = (ProgressBar) findViewById(R.id.gif_progbar);
@@ -158,6 +179,37 @@ public class HighlightActivity extends ActionBarActivity {
     public void onGifSelectTeamClick(View v) {
         Intent intent = new Intent(this, LeagueSelectorActivity.class);
         startActivity(intent);
+    }
+
+    public void onHighlightRefreshClick(View v) {
+
+        progText.setVisibility(View.VISIBLE);
+        progBar.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.GONE);
+
+        SharedPreferences preferences = getSharedPreferences(MainActivity.PREFS_NAME, 0);
+
+        String team = preferences.getString("curTeam", null);
+        String id = preferences.getString("curId", null);
+
+        if(team == null || id == null) {
+            progText.setText("No team selected. Please select a team!");
+            progBar.setVisibility(View.GONE);
+        } else {
+            String teamKey = myMap.fetchSub(id, team);
+
+            if(teamKey == null) {
+                progText.setClickable(false);
+                progText.setText("Sorry, no highlights available for that team!");
+                progBar.setVisibility(View.GONE);
+            } else {
+                new AsyncRedditFetcher().execute(teamKey);
+            }
+
+        }
+
+
+
     }
 
     /*
@@ -336,6 +388,7 @@ public class HighlightActivity extends ActionBarActivity {
             progBar.setVisibility(View.GONE);
 
             mAdapter = new HighlightAdapter(myList);
+            mRecyclerView.setVisibility(View.VISIBLE);
             mRecyclerView.setAdapter(mAdapter);
 
 

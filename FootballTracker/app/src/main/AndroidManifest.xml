@@ -3,9 +3,10 @@
     package="com.example.kvarnsen.footballtracker" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
-        android:name="Globals"
+        android:name=".globals.Globals"
         android:allowBackup="true"
         android:icon="@drawable/ic_soccer"
         android:label="@string/app_name"

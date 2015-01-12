@@ -85,5 +85,7 @@
     <string name="highlight_max_selector_text">Set number of highlights to display</string>
     <string name="highlight_limit">Highlight Limit</string>
     <string name="pref_highlight_number">5</string>
+    <string name="refresh_fixture_text">Refresh fixture</string>
+    <string name="refresh_highlight_text">Refresh highlights</string>
 
 </resources>

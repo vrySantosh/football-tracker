@@ -19,7 +19,22 @@
             android:id="@+id/my_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimaryDark"/>
+            android:background="?attr/colorPrimaryDark">
+            
+            <ImageButton
+                android:id="@+id/refresh_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_refresh"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:clickable="true"
+                android:onClick="onRefreshClick"
+                android:longClickable="true"
+                android:contentDescription="@string/refresh_fixture_text"/>
+            
+            
+            </android.support.v7.widget.Toolbar>
 
         <TextView
             android:id="@+id/loading_text"

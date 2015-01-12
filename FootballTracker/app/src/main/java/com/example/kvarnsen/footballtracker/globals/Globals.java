@@ -1,4 +1,4 @@
-package com.example.kvarnsen.footballtracker;
+package com.example.kvarnsen.footballtracker.globals;
 
 import android.app.Application;
 

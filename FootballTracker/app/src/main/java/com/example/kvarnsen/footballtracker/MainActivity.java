@@ -3,11 +3,13 @@ package com.example.kvarnsen.footballtracker;
 import java.util.*;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,8 +19,10 @@ import android.support.v7.widget.*;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kvarnsen.footballtracker.adapters.FixtureAdapter;
+import com.example.kvarnsen.footballtracker.globals.Globals;
 import com.example.kvarnsen.footballtracker.teamhandlers.LeagueSelectorActivity;
 import com.example.kvarnsen.footballtracker.utility.JSONParser;
 
@@ -51,6 +55,22 @@ public class MainActivity extends ActionBarActivity {
         LinearLayout curLayout = (LinearLayout) findViewById(R.id.fixtureButton);
         curLayout.setClickable(false);
         curLayout.setBackgroundColor(getResources().getColor(R.color.grey));
+
+        View.OnLongClickListener listener = new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                Vibrator vb = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                vb.vibrate(1000);
+
+                Toast toast = Toast.makeText(getApplicationContext(), v.getContentDescription(), Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 100);
+                toast.show();
+                return true;
+            }
+        };
+
+        findViewById(R.id.refresh_button).setOnLongClickListener(listener);
 
         progText = (TextView) findViewById(R.id.loading_text);
         progBar = (ProgressBar) findViewById(R.id.progbar);
@@ -168,6 +188,42 @@ public class MainActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
+    public void onRefreshClick(View v) {
+
+        progText.setVisibility(View.VISIBLE);
+        progBar.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.GONE);
+
+        preferences = getSharedPreferences(PREFS_NAME, 0);
+
+        String team = preferences.getString("curTeam", null);
+        String id = preferences.getString("curId", null);
+
+        if (team == null) {
+            progText.setText("Please select a team.");
+            progBar.setVisibility(View.GONE);
+        }
+        else {
+
+            switch (id) {
+                case "bundesliga":
+                    new AsyncTaskParser().execute(team, id);
+                    break;
+                case "liga":
+                    new AsyncTaskParser().execute(team, id);
+                    break;
+                case "premier":
+                    new AsyncTaskParser().execute(team, id);
+                    break;
+                default:
+                    break;
+            }
+
+
+        }
+
+    }
+
     /*
         Create ArrayList of Game instances for fixture use
      */
@@ -221,6 +277,7 @@ public class MainActivity extends ActionBarActivity {
 
             // specify an adapter (see also next example)
             mAdapter = new FixtureAdapter(myList);
+            mRecyclerView.setVisibility(View.VISIBLE);
             mRecyclerView.setAdapter(mAdapter);
 
 

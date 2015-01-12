@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.RadioButton;
 
-import com.example.kvarnsen.footballtracker.Globals;
+import com.example.kvarnsen.footballtracker.globals.Globals;
 import com.example.kvarnsen.footballtracker.MainActivity;
 import com.example.kvarnsen.footballtracker.R;
 

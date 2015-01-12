@@ -15,7 +15,7 @@ import com.example.kvarnsen.footballtracker.containers.Game;
 import java.util.ArrayList;
 
 /*
-    Adapter for  MainActivity's RecyclerView.
+    Adapter for MainActivity's RecyclerView.
 
     Code adapted with alterations from https://developer.android.com/training/material/lists-cards.html
  */
