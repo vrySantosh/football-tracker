@@ -194,7 +194,8 @@ public class JSONParser {
 
 
             } catch (IOException e) {
-                e.printStackTrace();
+                gameList = null;
+                return gameList;
             } finally {
                 urlConnection.disconnect();
             }

@@ -271,14 +271,23 @@ public class MainActivity extends ActionBarActivity {
 
             fixture = myList;
 
-            // "remove" loading text and progress wheel
-            progText.setVisibility(View.GONE);
-            progBar.setVisibility(View.GONE);
+            if(fixture == null) {
 
-            // specify an adapter (see also next example)
-            mAdapter = new FixtureAdapter(myList);
-            mRecyclerView.setVisibility(View.VISIBLE);
-            mRecyclerView.setAdapter(mAdapter);
+                progBar.setVisibility(View.GONE);
+                progText.setText("Unable to connect to server, please try again later.");
+
+            } else {
+
+                // "remove" loading text and progress wheel
+                progText.setVisibility(View.GONE);
+                progBar.setVisibility(View.GONE);
+
+                // specify an adapter (see also next example)
+                mAdapter = new FixtureAdapter(myList);
+                mRecyclerView.setVisibility(View.VISIBLE);
+                mRecyclerView.setAdapter(mAdapter);
+
+            }
 
 
         }

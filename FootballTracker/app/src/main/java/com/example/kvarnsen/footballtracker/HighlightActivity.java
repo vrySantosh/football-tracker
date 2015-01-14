@@ -253,6 +253,7 @@ public class HighlightActivity extends ActionBarActivity {
             }
 
             if(urlConnection == null) {
+                listing = null;
                 return listing;
             }
 
@@ -363,6 +364,7 @@ public class HighlightActivity extends ActionBarActivity {
 
 
             } catch (IOException e) {
+                listing = null;
                 return listing;
             } finally {
                 urlConnection.disconnect();
@@ -377,7 +379,11 @@ public class HighlightActivity extends ActionBarActivity {
 
             urls = myList;
 
-            if(urls == null || urls.size() == 0) {
+            if(urls == null) {
+                progText.setText("Unable to connect to server, please try again later.");
+                progBar.setVisibility(View.GONE);
+                return;
+            } else if(urls.size() == 0) {
                 progText.setText("Sorry, no highlights available for that team!");
                 progBar.setVisibility(View.GONE);
                 return;
